@@ -34,7 +34,7 @@ nav li {
 main{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    min-height: 400px;
+    min-height: 400px;/*ajuda de ia*/
     gap: 5px;
     padding: 5px;
 }
