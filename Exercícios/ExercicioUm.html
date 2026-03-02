@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/action_page.html">
+        <fieldset>
+            <legend>Formulário Matrícula de Curso</legend>
+            <label for="pnome">Primeiro nome:</label><br>
+            <input type="text" id="pnome" name="pnome"><br>       
+            <label for="unome">Sobrenome:</label><br>
+            <input type="text" id="unome" name="unome">
+            
+            <p>Curso:</p>
+            <input type="radio" id="TecnicoInformatica" name="curso" value="TecnicoInformatica">
+            <label for="html">Técnico em informática</label><br>
+            <input type="radio" id="DesenvolvimentoSistemas" name="curso" value="DesenvolvimentoSistemas">
+            <label for="css">Desenvolvimento de sistemas</label><br>
+            <input type="radio" id="EnergiasRenovaveis" name="curso" value="EnergiasRenovaveis">
+            <label for="javascript">Energias Renováveis</label><br>
+            
+            <p>Linguagem de Programação de sua prefrerência</p>
+            <input type="checkbox" id="language1" name="language1" value="php">
+            <label for="language1"> PHP</label><br>
+            <input type="checkbox" id="language2" name="language2" value="java">
+            <label for="language2"> Java</label><br>
+            <input type="checkbox" id="language3" name="language3" value="python">
+            <label for="language3"> Python</label><br>
+
+            <label for="turno">Escolha um Turno:</label>
+            <select name="turno" id="turno">
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+                <option value="Noturno">Noturno</option>
+            </select><br>
+
+            <label for="browser"> Escolha uma unidade próxima a você:</label>
+            <input list="browsers" name="browser" id="browser">
+            <datalist id="browsers">
+                <option value="IFSC Chapecó">
+                <option value="IFSC Xanxerê">
+                <option value="IFSC Palhoça">
+                <option value="IFSC Florianópolis">
+                <option value="IFSC São Miguel do Oeste">
+            </datalist>
+        </fieldset>
+    </form>    
+</body>
+</html>
