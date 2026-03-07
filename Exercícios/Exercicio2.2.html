@@ -1,13 +1,80 @@
 <!--Exercício Prático Dois - HTML-->
 <!--Questão Dois-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ficha Cadastral</title>
 </head>
 <body>
     
+    <h2 style="width: 500px; text-align:center">Ficha Cadastral</h2><!--tentei usar a tag <center> ou o aling="center mas pelo que pesquisei não funiconam mais em html5"-->
+
+    <form>
+        <table width="500" cellspacing="1" cellpadding="1" style="table-layout: fixed;">
+            
+            <colgroup>
+                <col span="4">
+            </colgroup>
+
+            <tr>
+                <td><label for="nome">Nome:</label></td>
+                <td colspan="3"><input type="text" id="nome" name="nome" size="55"></td>
+            </tr>
+
+            <tr>
+                <td><label for="rg">RG:</label></td>
+                <td><input type="text" id="rg" name="rg" size="13"></td>
+                <td><label for="cpf">C.P.F.:</label></td>
+                <td><input type="text" id="cpf" name="cpf" size="13"></td>
+            </tr>
+
+            <tr>
+                <td><label for="endereco">Endereço:</label></td>
+                <td colspan="3"><input type="text" id="endereco" name="endereco" size="55"></td>
+            </tr>
+
+            <tr>
+                <td><label for="sexo">Sexo:</label></td>
+                <td>
+                    <select name="sexo" id="sexo">
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                    </select>
+                </td>
+
+                <td><label for="nascimento">Data Nascimento:</label></td>
+                <td><input type="text" id="nascimento" name="nascimento" size="13"></td>
+            </tr>
+
+            <tr>
+                <td><label>Situação Civil:</label></td>
+
+                <td>
+                    <input type="radio" id="solteiro" name="situacaoCivil" value="Solteiro">
+                    <label for="solteiro">Solteiro(a)</label>
+                </td>
+
+                <td>
+                    <input type="radio" id="casado" name="situacaoCivil" value="Casado">
+                    <label for="casado">Casado(a)</label>
+                </td>
+
+                <td>
+                    <input type="radio" id="viuvo" name="situacaoCivil" value="Viuvo">
+                    <label for="viuvo">Viúvo(a)</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" style="text-align:center;"><!--tentei usar a tag <center> ou o aling="center mas pelo que pesquisei não funiconam mais em html5"-->
+                    <input type="reset" value="Limpar Dados">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+
 </body>
 </html>
