@@ -1,0 +1,64 @@
+<!--Exercício Prático Dois - HTML-->
+<!--Questão Um-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matrícula</title>
+</head>
+<body>
+    <form action="Sucesso.html">
+            <fieldset>
+                <legend>Formulário Matrícula de Curso</legend>
+
+                <label for="nome">Nome:</label><br>
+                <textarea id="nome" name="nome" rows="4" cols="50" maxlength="50" required></textarea><br><br>
+
+                <label for="dataNascimento">Data de nascimento: </label>
+                <input type="date" id="dataNascimento" name="dataNascimento" value="dataNascimento" required><br><br>
+                
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+                       
+                <label for="telefone">Telefone:</label><br>
+                <input type="tel" id="telefone" name="telefone" maxlength="15" required><br><br>
+
+                <label for="serie">Escolha uma Série:</label>
+                <select name="serie" id="serie" required>
+                    <option value="PrimeiroEM">1º ano do Ensino Médio</option>
+                    <option value="SegundoEM">2º ano do Ensino Médio</option>
+                    <option value="TerceiroEM">3º ano do Ensino Médio</option>
+                    <option value="QuartoEM">4º ano do Ensino Médio</option>
+                </select><br><br>
+                
+                <legend>Turno preferencial: </legend>
+                <input type="radio" id="matutino" name="turno" value="matutino" required>
+                <label for="matutino">Matutino</label><br>
+                <input type="radio" id="vespertino" name="turno" value="vespertino">
+                <label for="vespertino">Vespertino</label><br>
+                <input type="radio" id="noturno" name="turno" value="noturno">
+                <label for="noturno">Noturno</label><br><br>
+
+
+                <legend>Quais atividades extra-curriculares a seguir você cursa?:</legend>
+                <input type="checkbox" id="atv1" name="atv1" value="Teatro">
+                <label for="atv1"> Teatro</label><br>
+                <input type="checkbox" id="atv2" name="atv2" value="Música">
+                <label for="atv2"> Música</label><br>
+                <input type="checkbox" id="atv3" name="atv3" value="Ballet">
+                <label for="atv3"> Ballet</label><br>
+                <input type="checkbox" id="atv4" name="atv4" value="Pintura">
+                <label for="atv4"> Pintura</label><br>
+                <input type="checkbox" id="atv5" name="atv5" value="Judô">
+                <label for="atv5"> Judô</label><br>                
+                <input type="checkbox" id="atv6" name="atv6" value="Futebol">
+                <label for="atv6"> Futebol</label><br><br>
+
+                <input type="submit" id="submit" name="submit" value="Submit">
+            </fieldset>
+        </form>
+    
+</body>
+</html>
