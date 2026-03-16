@@ -1,0 +1,15 @@
+:root{
+    --azul-escuro: #020115;
+    --amarelo: #ffc107;
+}
+
+.hero-image{
+width: 150px;
+height: 150px;
+border: 3px solid var(--amarelo);
+}
+
+.hero-section{
+    background: linear-gradient(45deg, var(--azul-escuro), #1a1a2e);
+    min-height: 50vh;/*vh proporção*/
+}
