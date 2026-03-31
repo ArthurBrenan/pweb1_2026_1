@@ -106,3 +106,8 @@ body::after {
   pointer-events: none;
 }
 
+.link{
+  text-decoration: none;
+  color: #e0e0d1;
+  
+}
