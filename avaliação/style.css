@@ -1,6 +1,6 @@
 .titulo-festival {
-  font-family: 'Cormorant Garamond', serif;
-  text-align: center;
+  font-family: 'sans-serif', serif;
+  text-align: left;
   font-size: clamp(5rem, 10vw, 6rem);
   text-transform: uppercase;
   
@@ -20,6 +20,52 @@
   filter: contrast(1.1) brightness(0.9) opacity(0.9);
   
   margin: 30px;
+}
+
+/* Container principal que segura o título e o menu */
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* Empurra o título para a esquerda e o menu para a direita */
+    align-items: center;           /* Alinha verticalmente ao centro */
+    padding: 10px 50px;            /* Espaçamento interno nas laterais */
+    background-color: #000;        /* Fundo preto como na imagem */
+    border-bottom: 1px solid #333; /* Linha sutil opcional */
+}
+
+/* Estilização do Título (Mantendo seu estilo original) */
+.logo-titulo h1 {
+    font-family: 'sans-serif', serif;
+    font-size: 2rem;               /* Reduzi o tamanho para caber na barra */
+    text-transform: uppercase;
+    color: #e0e0d1; 
+    letter-spacing: 0.2em; 
+    font-weight: 700;
+    margin: 0;                     /* Remove margens padrão */
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+}
+
+/* Estilização dos Links */
+.menu-links {
+    display: flex;
+    gap: 30px;                     /* Espaço entre os links */
+}
+
+.menu-links a {
+    text-decoration: none;
+    color: #e0e0d1;
+    font-family: sans-serif;       /* Ou a fonte que preferir */
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    border-bottom: 2px solid transparent; /* Preparado para o efeito de hover */
+    padding-bottom: 5px;
+}
+
+/* Efeito de hover (aquela linha vermelha da imagem) */
+.menu-links a:hover {
+    color: #fff;
+    border-bottom: 2px solid #ff0000; /* Linha vermelha ao passar o mouse */
 }
 
 .section{
