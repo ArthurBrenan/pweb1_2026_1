@@ -157,3 +157,18 @@ body::after {
   color: #e0e0d1;
   
 }
+/* Efeito de foto antiga na galeria */
+.grayscale-hover {
+    filter: grayscale(100%) sepia(20%);
+    transition: transform 0.5s ease;
+}
+
+.grayscale-hover:hover {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+.time-unit span {
+    font-family: 'Courier New', Courier, monospace; /* Fonte tipo máquina de escrever */
+    color: #e0e0d1;
+}
