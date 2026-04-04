@@ -1,75 +1,215 @@
 <!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Diversa</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    </head>
+<html lang="en">
 
-    <body>
-        <header>
-        </header>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diversa - Memória Musical</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="/avaliação/style.css" rel="stylesheet">
+</head>
 
-        <nav>
-        </nav>
+<body>
+    <div class="row d-flex justify-content-center align-items-center rounded bg-dark p-3 text-white shadow-lg">
 
-        <main>
-            <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="col-3 ">
+            <header class="d-flex rounded justify-content-left">
+                <a class="text-decoration-none" href="#"
+                    style=" font-family: sans-serif; font-size: 2rem; color: #e0e0d1; letter-spacing: 0,2em; font-weight: 700; text-shadow: 2px 2px 0px rgba(0, 0, 0, 1); margin: 0;">POST
+                    MORTEM
+                </a>
+            </header>
+        </div>
 
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+        <div class="col-3"></div>
+        <div class="col-6">
+            <nav class="d-flex justify-content-between rounded">
+                <div class="nav-scroller d-flex justify-content-around w-100"
+                    style=" font-family: sans-serif; font-size: 1rem; color: #e0e0d1; letter-spacing: 0,1em; font-weight: 700; text-shadow: 2px 2px 0px rgba(0, 0, 0, 1); margin: 0;">
+                    <a class="text-decoration-none" href="#" style="color: #e0e0d1;">PÁGINA INICIAL</a>
+                    <a class="text-decoration-none" href="#" style="color: #e0e0d1;">SOBRE NÓS</a>
+                    <a class="text-decoration-none" href="#" style="color: #e0e0d1;">CONTATO</a>
+                    <a class="text-decoration-none" href="#" style="color: #e0e0d1;">DIVERSA</a>
                 </div>
+            </nav>
+        </div>
+    </div>
 
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="/avaliação/img/amywinehouse.webp" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Amy Whinehouse</h5>
-                            <p>morreu</p>
-                        </div>
-                
-                    </div>
 
-                    <div class="carousel-item">
-                        <img src="/avaliação/img/beatles.webp" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>The Beatles</h5>
-                            <p>morreram também</p>
-                        </div>
-
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
+    <main class="container my-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/amywinehouse.webp" class="card-img-top" alt="Amy Winehouse">
+                    <div class="card-body">
+                        <h5 class="card-title">AMY WINEHOUSE</h5>
+                        <p class="card-text">Faleceu em 23 de julho de 2011, aos 27 anos, devido a uma <b>ingestão
+                                excessiva de álcool</b> após um período de abstinência.</p>
                     </div>
                 </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
-        </main>
-        
-        <footer>
-            <nav>
-            </nav>
 
-            <nav>
-            </nav>
-        </footer>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/beatles.webp" class="card-img-top" alt="The Beatles">
+                    <div class="card-body">
+                        <h5 class="card-title">THE BEATLES</h5>
+                        <p class="card-text">John Lennon foi <b>assassinado</b> em 1980 em frente ao seu prédio. George
+                            Harrison faleceu em 2001, vítima de <b>câncer de pulmão</b>. Paul e Ringo continuam vivos.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    </body>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/beethoven.webp" class="card-img-top" alt="Beethoven">
+                    <div class="card-body">
+                        <h5 class="card-title">BEETHOVEN</h5>
+                        <p class="card-text">Faleceu em 1827. A causa exata é debatida, mas evidências apontam para
+                            <b>cirrose hepática</b> e possível envenenamento por chumbo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/belchior.jpg" class="card-img-top" alt="Belchior">
+                    <div class="card-body">
+                        <h5 class="card-title">BELCHIOR</h5>
+                        <p class="card-text">O cantor cearense faleceu em 30 de abril de 2017, aos 70 anos, em
+                            decorrência do <b>rompimento de uma artéria aorta</b>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/carmenmiranda.jpg" class="card-img-top" alt="Carmen Miranda">
+                    <div class="card-body">
+                        <h5 class="card-title">CARMEN MIRANDA</h5>
+                        <p class="card-text">Faleceu em 5 de agosto de 1955, aos 46 anos, vítima de um <b>ataque
+                                cardíaco fulminante</b> em sua casa em Beverly Hills.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/curtcobain.jpg" class="card-img-top" alt="Kurt Cobain">
+                    <div class="card-body">
+                        <h5 class="card-title">KURT COBAIN</h5>
+                        <p class="card-text">O líder do Nirvana faleceu em abril de 1994. A causa oficial foi
+                            <b>suicídio</b> com um tiro na cabeça após uma overdose de heroína.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/elisregina.webp" class="card-img-top" alt="Elis Regina">
+                    <div class="card-body">
+                        <h5 class="card-title">ELIS REGINA</h5>
+                        <p class="card-text">Faleceu em 19 de janeiro de 1982, aos 36 anos, devido a uma <b>overdose de
+                                cocaína combinada com ingestão de álcool</b>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/fred.webp" class="card-img-top" alt="Freddie Mercury">
+                    <div class="card-body">
+                        <h5 class="card-title">FREDDIE MERCURY</h5>
+                        <p class="card-text">O vocalista do Queen faleceu em 24 de novembro de 1991, em decorrência de
+                            uma <b>broncopneumonia acarretada pela AIDS</b>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/gal.webp" class="card-img-top" alt="Gal Costa">
+                    <div class="card-body">
+                        <h5 class="card-title">GAL COSTA</h5>
+                        <p class="card-text">Faleceu em 9 de novembro de 2022, aos 77 anos, vítima de um <b>infarto
+                                agudo do miocárdio</b> enquanto se recuperava de uma cirurgia.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/marilia.jpg" class="card-img-top" alt="Marília Mendonça">
+                    <div class="card-body">
+                        <h5 class="card-title">MARÍLIA MENDONÇA</h5>
+                        <p class="card-text">Faleceu em 5 de novembro de 2021, aos 26 anos, em um trágico <b>acidente
+                                aéreo</b> na cidade de Piedade de Caratinga, Minas Gerais.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/michael.jpg" class="card-img-top" alt="Michael Jackson">
+                    <div class="card-body">
+                        <h5 class="card-title">MICHAEL JACKSON</h5>
+                        <p class="card-text">Faleceu em 25 de junho de 2009 por <b>intoxicação aguda de propofol e
+                                benzodiazepina</b>, resultando em uma parada cardíaca.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/ozzy.webp" class="card-img-top" alt="Ozzy Osbourne">
+                    <div class="card-body">
+                        <h5 class="card-title">OZZY OSBOURNE</h5>
+                        <p class="card-text"><b>Nota:</b> Ozzy Osbourne <b>está vivo</b>, embora enfrente problemas de
+                            saúde como a Doença de Parkinson.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/ritalee.jpg" class="card-img-top" alt="Rita Lee">
+                    <div class="card-body">
+                        <h5 class="card-title">RITA LEE</h5>
+                        <p class="card-text">A rainha do rock brasileiro faleceu em 8 de maio de 2023, aos 75 anos, em
+                            decorrência de um <b>câncer de pulmão</b>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/timmaia.webp" class="card-img-top" alt="Tim Maia">
+                    <div class="card-body">
+                        <h5 class="card-title">TIM MAIA</h5>
+                        <p class="card-text">Faleceu em 15 de março de 1998, aos 55 anos, devido a uma <b>infecção
+                                generalizada</b> após complicações de um choque séptico.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/avaliação/img/tomjobin.jpg" class="card-img-top" alt="Tom Jobim">
+                    <div class="card-body">
+                        <h5 class="card-title">TOM JOBIM</h5>
+                        <p class="card-text">Faleceu em 8 de dezembro de 1994, em Nova York, devido a uma <b>parada
+                                cardíaca</b> enquanto se recuperava de uma cirurgia de bexiga.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+</body>
+
 </html>

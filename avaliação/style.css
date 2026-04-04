@@ -83,7 +83,7 @@
   color: #fff;
   padding: 50px 20px;
   text-align: center;
-  font-family: 'Cinzel', serif; /* Use uma fonte impactante */
+  font-family: 'sans-serif', serif; /* Use uma fonte impactante */
   text-transform: uppercase;
  
 }
@@ -171,4 +171,11 @@ body::after {
 .time-unit span {
     font-family: 'Courier New', Courier, monospace; /* Fonte tipo máquina de escrever */
     color: #e0e0d1;
+}
+
+.card-img-top {
+    width: 100%;       /* Largura total do container do card */
+    height: 350px;     /* Altura fixa que você desejar */
+    object-fit: cover;  /* Mantém a proporção e corta as sobras */
+    object-position: center; /* Garante que o corte foque no centro da foto */
 }
