@@ -7,9 +7,6 @@
     <title>Contato</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 
@@ -54,7 +51,7 @@
 
                 <div class="col-6">
 
-                    <h3 class="mb-4">Como chegar?</h3><!--titulão-->
+                    <h3 class="mb-4">Como chegar?</h3>
 
                     <h4>Se você é vivo:</h4>
                     <div class="rounded p-4" style="box-shadow: inset 0 5px 7px rgba(0, 0, 0, 0.25);">
@@ -129,7 +126,7 @@
                         </p>
                         <br><br><br>
                         <p class="small">
-                            Lembre-se, na praia podem haver espiritos piratas porntos para saquear sua energia.
+                            Lembre-se, na praia podem haver espiritos piratas prontos para saquear sua energia.
                         </p>
                     </div>
 
@@ -153,25 +150,24 @@
                     <h3 class="mt-3">É artista e não morreu?</h3>
                     <p class="small">Preencha esse formulário e se inscreva para realizar um show no seu pós-morte!</p>
 
-                    <!--inicio formualrio-->
+                    <!-- FORMULÁRIO SEM JAVASCRIPT -->
                     <div class="rounded p-4" style="box-shadow: inset 0 5px 7px rgba(0, 0, 0, 0.25);">
-                        <form action="/action_page.html">
-
+                        <form action="#" method="get">
                             <h4>Pré-inscrição de artistas</h4>
 
                             <div class="row">
                                 <div class="col-6">
                                     <label for="pnome">Nome: </label><br>
-                                    <input class="bg-dark text-white border-secondary rounded"
+                                    <input class="bg-dark text-white border-secondary rounded w-100"
                                         style="box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.2);" type="text" id="pnome"
-                                        name="pnome">
+                                        name="nome">
                                     <br>
                                 </div>
                                 <div class="col-6">
                                     <label for="unome">Sobrenome:</label><br>
-                                    <input class="bg-dark text-white border-secondary rounded"
+                                    <input class="bg-dark text-white border-secondary rounded w-100"
                                         style="box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.2);" type="text" id="unome"
-                                        name="unome">
+                                        name="sobrenome">
                                     <br><br>
                                 </div>
                             </div>
@@ -179,61 +175,66 @@
                             <legend>Como você está?: </legend>
                             <div class="row">
                                 <div class="col-3">
-                                    <input type="radio" id="Tecnico" name="tipo" value="Tecnico">
-                                    <label for="html">Vivo e saudável</label>
+                                    <input type="radio" id="vivo_saudavel" name="estado" value="Vivo e saudável">
+                                    <label for="vivo_saudavel">Vivo e saudável</label>
                                 </div>
                                 <div class="col-4">
-                                    <input type="radio" id="Professor" name="tipo" value="Professor">
-                                    <label for="css">Vivo mas quase morrendo</label>
+                                    <input type="radio" id="vivo_quase" name="estado" value="Vivo mas quase morrendo">
+                                    <label for="vivo_quase">Vivo mas quase morrendo</label>
                                 </div>
                                 <div class="col-5">
-                                    <input type="radio" id="Aluno" name="tipo" value="Aluno">
-                                    <label for="javascript">Mais pra lá do que pra cá</label>
+                                    <input type="radio" id="mais_pra_la" name="estado" value="Mais pra lá do que pra cá">
+                                    <label for="mais_pra_la">Mais pra lá do que pra cá</label>
                                 </div>
                             </div>
 
+                            <br>
+
+                            <label for="ano_apresentacao">Em qual ano você gostaria de, se pudesse, se apresentar?</label><br>
+                            <input class="bg-dark text-white border-secondary rounded w-100"
+                                style="box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.2);" type="text" id="ano_apresentacao"
+                                name="ano_apresentacao" placeholder="Ex: 2030">
                             <br><br>
 
-                            <label for="unome">Em qual ano você gostaria de, se pudesse, se apresentar?</label><br>
-                            <input class="bg-dark text-white border-secondary rounded"
-                                style="box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.2);" type="text" id="unome"
-                                name="unome">
-
-                            <br><br>
-
-                            <label for="obs">Qual artista você quer que te receba no pós-morte?</label><br>
-                            <textarea class="bg-dark text-white border-secondary rounded"
-                                style="box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.2);" id="obs" name="obs" rows="2"
-                                cols="90">
-                                    </textarea>
-
+                            <label for="artista_receber">Qual artista você quer que te receba no pós-morte?</label><br>
+                            <textarea class="bg-dark text-white border-secondary rounded w-100"
+                                style="box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.2);" id="artista_receber" name="artista_receber" rows="2"
+                                placeholder="Ex: Tim Maia, Freddie Mercury, etc."></textarea>
                             <br><br>
 
                             <legend>Áreas de atuação:</legend>
-                            <input type="checkbox" id="mod1" name="mod1" value="Compras">
-                            <label for="mod1">Canto/voz</label>
-                            <input type="checkbox" id="mod2" name="mod2" value="Biblioteca">
-                            <label for="mod2">Piano</label>
-                            <input type="checkbox" id="mod3" name="mod3" value="Academico">
-                            <label for="mod3">Harpa</label>
-                            <input type="checkbox" id="mod4" name="mod4" value="Documentação">
-                            <label for="mod4">Percussão</label>
-                            <input type="checkbox" id="mod5" name="mod5" value="RecursosHumanos">
-                            <label for="mod5">Cordas</label>
-                            <input type="checkbox" id="mod6" name="mod6" value="Documentação">
-                            <label for="mod6">Sopros</label>
-                            <input type="checkbox" id="mod7" name="mod7" value="Documentação">
-                            <label for="mod7">Gaita</label>
-                            <input type="checkbox" id="mod8" name="mod8" value="Documentação">
-                            <label for="mod8">Outros</label><br><br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="mod1" name="atuacao_canto" value="Canto/voz">
+                                    <label for="mod1">Canto/voz</label><br>
+                                    <input type="checkbox" id="mod2" name="atuacao_piano" value="Piano">
+                                    <label for="mod2">Piano</label><br>
+                                    <input type="checkbox" id="mod3" name="atuacao_harpa" value="Harpa">
+                                    <label for="mod3">Harpa</label><br>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="mod4" name="atuacao_percussao" value="Percussão">
+                                    <label for="mod4">Percussão</label><br>
+                                    <input type="checkbox" id="mod5" name="atuacao_cordas" value="Cordas">
+                                    <label for="mod5">Cordas</label><br>
+                                    <input type="checkbox" id="mod6" name="atuacao_sopros" value="Sopros">
+                                    <label for="mod6">Sopros</label><br>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="mod7" name="atuacao_gaita" value="Gaita">
+                                    <label for="mod7">Gaita</label><br>
+                                    <input type="checkbox" id="mod8" name="atuacao_outros" value="Outros">
+                                    <label for="mod8">Outros</label><br>
+                                </div>
+                            </div>
+                            <br>
 
-                            <input class="bg-dark text-white rounded" type="button" id="salvar" name="salvar"
-                                value="Salvar">
-                            <input class="bg-dark text-white rounded" type="button" id="excluir" name="excluir"
-                                value="Excluir">
+                            <!-- BOTÕES: submit envia, reset limpa -->
+                            <input type="submit" class="bg-dark text-white rounded border-warning px-4 py-1 me-2" value="Salvar">
+                            <input type="reset" class="bg-dark text-white rounded border-secondary px-4 py-1" value="Excluir">
                         </form>
                     </div>
-                    <!--fim formualrio-->
+                    <!--fim formulario-->
                 </div>
             </div>
         </section>
