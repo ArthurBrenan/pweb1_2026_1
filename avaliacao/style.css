@@ -3,69 +3,56 @@
   text-align: left;
   font-size: clamp(5rem, 10vw, 6rem);
   text-transform: uppercase;
-  
-  /* 1. Cor "Osso" ou "Mármore Envelhecido" (melhor que branco puro) */
   color: #e0e0d1; 
-  
-  /* 2. Espaçamento largo (dá um ar épico e solene) */
   letter-spacing: 0.3em; 
   font-weight: 700;
-
-  /* 3. Sombra de profundidade (parece entalhado na pedra) */
   text-shadow: 
     2px 2px 0px rgba(0, 0, 0, 1), 
     -1px -1px 0px rgba(255, 255, 255, 0.1);
-
-  /* 4. Filtro de Grão Sutil no próprio texto */
   filter: contrast(1.1) brightness(0.9) opacity(0.9);
-  
   margin: 30px;
 }
 
-/* Container principal que segura o título e o menu */
 .navbar-container {
     display: flex;
-    justify-content: space-between; /* Empurra o título para a esquerda e o menu para a direita */
-    align-items: center;           /* Alinha verticalmente ao centro */
-    padding: 10px 50px;            /* Espaçamento interno nas laterais */
-    background-color: #000;        /* Fundo preto como na imagem */
-    border-bottom: 1px solid #333; /* Linha sutil opcional */
+    justify-content: space-between; 
+    align-items: center;           
+    padding: 10px 50px;            
+    background-color: #000;        
+    border-bottom: 1px solid #333; 
 }
 
-/* Estilização do Título (Mantendo seu estilo original) */
 .logo-titulo h1 {
     font-family: 'sans-serif', serif;
-    font-size: 2rem;               /* Reduzi o tamanho para caber na barra */
+    font-size: 2rem;               
     text-transform: uppercase;
     color: #e0e0d1; 
     letter-spacing: 0.2em; 
     font-weight: 700;
-    margin: 0;                     /* Remove margens padrão */
+    margin: 0;                     
     text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
 }
 
-/* Estilização dos Links */
 .menu-links {
     display: flex;
-    gap: 30px;                     /* Espaço entre os links */
+    gap: 30px;                     
 }
 
 .menu-links a {
     text-decoration: none;
     color: #e0e0d1;
-    font-family: sans-serif;       /* Ou a fonte que preferir */
+    font-family: sans-serif;       
     font-weight: bold;
     font-size: 0.9rem;
     text-transform: uppercase;
     transition: color 0.3s;
-    border-bottom: 2px solid transparent; /* Preparado para o efeito de hover */
+    border-bottom: 2px solid transparent; 
     padding-bottom: 5px;
 }
 
-/* Efeito de hover (aquela linha vermelha da imagem) */
 .menu-links a:hover {
     color: #fff;
-    border-bottom: 2px solid #ff0000; /* Linha vermelha ao passar o mouse */
+    border-bottom: 2px solid #ff0000; 
 }
 
 .section{
@@ -79,13 +66,11 @@
 }
 
 .lineup-container {
-  
   color: #fff;
   padding: 50px 20px;
   text-align: center;
-  font-family: 'sans-serif', serif; /* Use uma fonte impactante */
+  font-family: 'sans-serif', serif; 
   text-transform: uppercase;
- 
 }
 
 .tier {
@@ -97,11 +82,10 @@
   margin-bottom: 30px;
 }
 
-/* Tamanhos responsivos com clamp() */
 .tier-1 h1 {
-  font-size: clamp(3rem, 10vw, 6rem); /* Ajusta conforme o tamanho da tela */
+  font-size: clamp(3rem, 10vw, 6rem); 
   margin: 0;
-  color: #f1c40f; /* Cor de destaque para o principal */
+  color: #f1c40f; 
 }
 
 .tier-2 h2 {
@@ -126,21 +110,17 @@
   color: #888;
 }
 
-/* Adiciona um separador visual entre os nomes pequenos */
 .tier-4 span:not(:last-child)::after {
   content: "|";
   margin-left: 10px;
   color: #444;
 }
 
-
-
 body {
-  background-color: #000000;
-  filter: sepia(10%) contrast(80%); /* Dá um ar orgânico */
+  background-color: #212529;
+  filter: sepia(10%) contrast(80%); 
 }
 
-/* Efeito de Vinheta (escurecer as bordas) */
 body::after {
   content: "";
   position: fixed;
@@ -155,9 +135,8 @@ body::after {
 .link{
   text-decoration: none;
   color: #e0e0d1;
-  
 }
-/* Efeito de foto antiga na galeria */
+
 .grayscale-hover {
     filter: grayscale(100%) sepia(20%);
     transition: transform 0.5s ease;
@@ -169,13 +148,13 @@ body::after {
 }
 
 .time-unit span {
-    font-family: 'Courier New', Courier, monospace; /* Fonte tipo máquina de escrever */
+    font-family: 'Courier New', Courier, monospace; 
     color: #e0e0d1;
 }
 
 .card-img-top {
-    width: 100%;       /* Largura total do container do card */
-    height: 350px;     /* Altura fixa que você desejar */
-    object-fit: cover;  /* Mantém a proporção e corta as sobras */
-    object-position: center; /* Garante que o corte foque no centro da foto */
+    width: 100%;       
+    height: 350px;     
+    object-fit: cover;  
+    object-position: center; 
 }
