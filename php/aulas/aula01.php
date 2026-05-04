@@ -44,6 +44,16 @@
         //vetores associativos
         $carro = ['modelo' => "mustang", 'cor' => "preto"];
         echo $carro['modelo']. " - " .$carro['cor'];
+
+
+        //aula3
+
+        $carros = [
+            ['modelo'=> "Mustang", 'cor' => "Branco", "Ano" => 2026],
+            ['modelo'=> "Opala", 'cor' => "Vermelho", "Ano" => 1993],
+            ['modelo'=> "Fusca", 'cor' => "Azul", "Ano" => 2003]
+        ];
+            //inacabado
     ?>
 
     <p>Meu site sobre <?= $carro['modelo']. " - " .$carro['cor'] ?></p>
