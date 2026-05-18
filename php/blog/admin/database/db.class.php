@@ -35,7 +35,7 @@ class db {
     //SELECT * FROM tabela
     public function all(){
         $sql = "SELECT*FROM $this->table_name";
-        $st - $this->conn->prepare($sql);
+        $st = $this->conn->prepare($sql);
         $st->execute();
 
         return $st->fetchAll(PDO::FETCH_CLASS);
@@ -59,7 +59,7 @@ class db {
         $st = $this->conn->prepare($sql);
         $st->execute($vetorData);
     }catch(PDOException $e){
-        var_dump('Erro ao inserir'. $e->getMessage());
+        throw new Exception("Erro ao inserir: ", $e->getMessage());
     }
 
     }

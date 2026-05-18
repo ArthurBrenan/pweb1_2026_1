@@ -28,7 +28,6 @@ if(!empty($_POST)){
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Email</th>
             </tr>

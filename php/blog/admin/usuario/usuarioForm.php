@@ -3,15 +3,35 @@ include '../header.php';
 include_once "../database/db.class.php";
 
 $db = new db('usuario');
+$success = '';
+$actionError = '';
+$errors = [];
 
 if(!empty($_POST)){
     //var_dump($_POST);
     //exit;
-    $db->store($_POST);
+    try{    
 
-    echo "<script>
-            setTimeout(()=>window.location.href='./UsuarioList.php',1500);
-        </script>";
+        if(!empty($_POST['nome'])){
+            $errors[] = "<li>O email é obrigatório</li>";
+        }
+        if(!empty($_POST['email'])){
+            $errors[] = "<li>O nome é obrigatório</li>";
+        }
+        
+        if(empty($errors)){
+            $db->store($_POST);
+            $success = "Registrado com sucesso";
+
+            redirect('./UsuarioList.php');
+        }
+
+        
+    } catch (PDOException $e){
+        $error = $e->getMessage();
+    } catch (Exception $e){
+        $error = $e->getMessage();
+    }
 }
 
 ?>
@@ -19,18 +39,16 @@ if(!empty($_POST)){
 
 
 <div class="col">
-    <form action="./resultadoFormAluno.php" method="post">
+    <?php actionMessage($success, $actionError) ?>
+    <?php showValidationError($errors) ?>
+    <form action="UsuarioForm.php" method="post">
         <div class="col-6">
             <label for="nome">Nome: </label>
-            <input type="text" name="nome" class="form-control">
+            <input type="text" name="nome" class="form-control" value="<?php echo getFormValue('nome'); ?>">
         </div>
         <div class="col-6">
             <label for="email">Email: </label>
             <input type="email" name="email" class="form-control">
-        </div>
-        <div class="col-6">
-            <label for="senha">Senha: </label>
-            <input type="password" name="senha" class="form-control">
         </div>
         <div class="col-6">
             <label for="telefone">Telefone: </label>
@@ -38,7 +56,7 @@ if(!empty($_POST)){
         </div>
         <div class="mt-2">
             <button type="submit" class="btn btn-success">Enviar</button>
-            <a href="./UsuarioList.php" class="btn btn-primary">Voltar</a>
+            <a href="./UsuarioForm.php" class="btn btn-primary">Voltar</a>
         </div>
     </form>
 </div>
