@@ -32,6 +32,14 @@ class db {
             die('Erro na conexão: ' . $e->getMessage());
         }
     }
+    //SELECT * FROM tabela
+    public function all(){
+        $sql = "SELECT*FROM $this->table_name";
+        $st - $this->conn->prepare($sql);
+        $st->execute();
+
+        return $st->fetchAll(PDO::FETCH_CLASS);
+    }
 
     //INSERT INTO `db_pweb1_2026_!`.`aluno` (`nome`, `telefone`, `email`) VALUES ('Arthur Brenan', '(49)999889988', 'arthur@gmail.com');
     public function store($dados){
