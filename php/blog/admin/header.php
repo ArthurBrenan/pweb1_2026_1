@@ -20,6 +20,11 @@
     </head>
 
     <?php
+
+      if(session_status() === PHP_SESSION_NONE){
+        session_start();
+    }
+
         function redirect($page, $time = 1500){
             echo "<script>
                 setTimeout(()=>window.location.href='$page', $time);
