@@ -1,26 +1,51 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 include '../header.php';
 include '../autenticacao.php';
-include_once "../database/db.class.php";
+include_once "../db.class.php";
 
 $db = new db('usuario');
 
-// LÓGICA DE EXCLUSÃO: Se vier um ID via GET para deletar
+// LÓGICA DE EXCLUSÃO
 if (!empty($_GET['id_deletar'])) {
-    // Como sua classe db ainda não tem um método delete nativo automatizado,
-    // você pode fazer uma query direta ou rodar pelo PDO da classe se necessário.
-    // Para não quebrar seu fluxo, deixei preparado. Se quiser deletar:
-    // $db->delete($_GET['id_deletar']); 
-    // header('Location: ./UsuarioList.php');
+    try {
+        $db->delete($_GET['id_deletar']);
+        // Redireciona para a mesma página para evitar reenvio
+        header('Location: UsuarioList.php?deletado=1');
+        exit;
+    } catch(Exception $e) {
+        $erroDelete = "Erro ao deletar: " . $e->getMessage();
+    }
 }
 
-// Busca sempre todos os dados atualizados para listar na tabela
-$dados = $db->all();
+// Mensagem de sucesso após deletar
+if (isset($_GET['deletado'])) {
+    $mensagem = "Usuário deletado com sucesso!";
+}
 
+// Busca todos os dados atualizados para listar
+$dados = $db->all();
 ?>
+
 <div class="row mb-3">
     <div class="col">
-        <a href="./UsuarioForm.php" class="btn btn-success">
+        <?php if(isset($mensagem)): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $mensagem; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
+        
+        <?php if(isset($erroDelete)): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $erroDelete; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
+        
+        <a href="usuarioForm.php" class="btn btn-success">
             <i class="fa-solid fa-plus"></i> Novo Usuário
         </a>
     </div>
@@ -32,31 +57,39 @@ $dados = $db->all();
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Idade</th> <th scope="col">Telefone</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Telefone</th>
                 <th scope="col">Email</th>
-                <th scope="col" class="text-center" style="width: 150px;">Ações</th> </tr>
+                <th scope="col" class="text-center" style="width: 150px;">Ações</th>
+            </tr>
         </thead>
         <tbody>
-            <?php
-                foreach($dados as $item){
-                    echo "<tr>
-                        <th scope='row'>$item->id</th>
-                        <td>$item->nome</td>
-                        <td>$item->idade anos</td> <td>$item->telefone</td>
-                        <td>$item->email</td>
-                        <td class='text-center'>
-                            <a href='./UsuarioForm.php?id=$item->id' class='btn btn-sm btn-primary' title='Editar'>
-                                Editar
-                            </a>
-                            
-                            <a href='./UsuarioList.php?id_deletar=$item->id' class='btn btn-sm btn-danger' 
-                               onclick=\"return confirm('Tem certeza que deseja excluir o usuário $item->nome?')\" title='Excluir'>
+            <?php if(count($dados) > 0): ?>
+                <?php foreach($dados as $item): ?>
+                <tr>
+                    <th scope='row'><?php echo $item->id; ?></th>
+                    <td><?php echo htmlspecialchars($item->nome); ?></td>
+                    <td><?php echo $item->idade; ?> anos</td>
+                    <td><?php echo htmlspecialchars($item->telefone); ?></td>
+                    <td><?php echo htmlspecialchars($item->email); ?></td>
+                    <td class='text-center'>
+                        <a href='usuarioForm.php?id=<?php echo $item->id; ?>' class='btn btn-sm btn-primary' title='Editar'>
+                            Editar
+                        </a>
+                        
+                        <a href='UsuarioList.php?id_deletar=<?php echo $item->id; ?>' 
+                            class='btn btn-sm btn-danger' 
+                            onclick='return confirm("Tem certeza que deseja excluir este usuário?")'>
                                 Excluir
-                            </a>
-                        </td>
-                    </tr>";
-                }
-            ?>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="6" class="text-center">Nenhum usuário cadastrado.</td>
+                </tr>
+            <?php endif; ?>
         </tbody>
     </table>
 </div>

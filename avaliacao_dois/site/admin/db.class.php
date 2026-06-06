@@ -46,7 +46,7 @@ class db {
     public function find($id){
         $sql = "SELECT * FROM $this->table_name WHERE id = ?";
         $st = $this->conn->prepare($sql);
-        $st->execute([$id]); // Corrigido: Passando o ID para o motor do banco
+        $st->execute([$id]);
 
         return $st->fetchObject();
     }
@@ -55,36 +55,44 @@ class db {
     public function findBy($campo, $valor){
         $sql = "SELECT * FROM $this->table_name WHERE $campo = ?";
         $st = $this->conn->prepare($sql);
-        $st->execute([$valor]); // Corrigido: Agora está certa! Passando o valor.
+        $st->execute([$valor]);
 
-        return $st->fetchObject(); // Corrigido: Adicionado os parênteses ()
+        return $st->fetchObject();
     }
 
     // INSERT INTO usuario (...) VALUES (...);
-    public function store($dados){
-        $campos = "";
-        $marcadores = "";
-        $vetorData = [];
-        $sep = "";
-
-        foreach($dados as $campo => $valor){
-            $campos .= $sep . $campo;
-            $marcadores .= $sep . "?";
-            $vetorData[] = $valor;
-            $sep = ",";
-        }
-        $sql = "INSERT INTO $this->table_name ($campos) VALUES ($marcadores);";
-        try{
-            $st = $this->conn->prepare($sql);
-            $st->execute($vetorData);
-        }catch(PDOException $e){
-            // Corrigido: O construtor de Exception aceita apenas a string como primeiro parâmetro
-            throw new Exception("Erro ao inserir: " . $e->getMessage());
-        }
+public function store($dados){
+    // Remove o campo 'id' se existir e estiver vazio
+    if(isset($dados['id']) && empty($dados['id'])) {
+        unset($dados['id']);
     }
+    
+    $campos = "";
+    $marcadores = "";
+    $vetorData = [];
+    $sep = "";
+
+    foreach($dados as $campo => $valor){
+        $campos .= $sep . $campo;
+        $marcadores .= $sep . "?";
+        $vetorData[] = $valor;
+        $sep = ",";
+    }
+    
+    $sql = "INSERT INTO $this->table_name ($campos) VALUES ($marcadores);";
+    
+    try{
+        $st = $this->conn->prepare($sql);
+        $st->execute($vetorData);
+        return $this->conn->lastInsertId();
+    }catch(PDOException $e){
+        throw new Exception("Erro ao inserir: " . $e->getMessage());
+    }
+}
+    
 
     // UPDATE tabela SET campo = ? WHERE id = ?;
-    public function update($dados){ // Corrigido: nome da função ajustado de 'uptade' para 'update'
+    public function update($dados){
         $campos = "";
         $vetorData = [];
         $sep = "";
@@ -97,15 +105,26 @@ class db {
             }
         }
         
-        // Corrigido: Adicionamos o ID no final do vetor porque a query exige o ID no WHERE
         $vetorData[] = $dados['id']; 
         $sql = "UPDATE $this->table_name SET $campos WHERE id = ?;";
 
         try{
             $st = $this->conn->prepare($sql);
-            $st->execute($vetorData);
+            return $st->execute($vetorData);
         }catch(PDOException $e){
             throw new Exception("Erro ao atualizar: " . $e->getMessage());
         }
     }
+
+    // DELETE FROM tabela WHERE id = ?
+public function delete($id){
+    try{
+        $sql = "DELETE FROM $this->table_name WHERE id = ?";
+        $st = $this->conn->prepare($sql);
+        return $st->execute([$id]);
+    }catch(PDOException $e){
+        throw new Exception("Erro ao deletar: " . $e->getMessage());
+    }
 }
+}
+?>
