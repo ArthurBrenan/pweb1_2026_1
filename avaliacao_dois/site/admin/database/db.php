@@ -6,7 +6,7 @@ class db {
     private $user     = 'root';
     private $password = '';
     private $port     = '3306';
-    private $dbname   = 'db_pweb1_2026_1';
+    private $dbname   = 'av2';
     private $table_name;
     private $conn; // conexão fica guardada para reutilizar
 
@@ -32,31 +32,35 @@ class db {
             die('Erro na conexão: ' . $e->getMessage());
         }
     }
-    //SELECT * FROM tabela
+
+    // SELECT * FROM tabela
     public function all(){
-        $sql = "SELECT*FROM $this->table_name";
+        $sql = "SELECT * FROM $this->table_name";
         $st = $this->conn->prepare($sql);
         $st->execute();
 
         return $st->fetchAll(PDO::FETCH_CLASS);
     }
 
+    // Busca por ID
     public function find($id){
-        $sql = "SELECT*FROM $this->table_name WHERE id = ?";
+        $sql = "SELECT * FROM $this->table_name WHERE id = ?";
         $st = $this->conn->prepare($sql);
-        $st->execute();
+        $st->execute([$id]); // Corrigido: Passando o ID para o motor do banco
 
         return $st->fetchObject();
     }
-    public function findBy($campo, $valor){
-        $sql = "SELECT*FROM $this->table_name WHERE $campo = ?";
-        $st = $this->conn->prepare($sql);
-        $st->execute();//TA CERTA ESSA LINHA?
 
-        return $st->fetchObject;
+    // Busca por qualquer outro campo (ex: email)
+    public function findBy($campo, $valor){
+        $sql = "SELECT * FROM $this->table_name WHERE $campo = ?";
+        $st = $this->conn->prepare($sql);
+        $st->execute([$valor]); // Corrigido: Agora está certa! Passando o valor.
+
+        return $st->fetchObject(); // Corrigido: Adicionado os parênteses ()
     }
 
-    //INSERT INTO `db_pweb1_2026_!`.`aluno` (`nome`, `telefone`, `email`) VALUES ('Arthur Brenan', '(49)999889988', 'arthur@gmail.com');
+    // INSERT INTO usuario (...) VALUES (...);
     public function store($dados){
         $campos = "";
         $marcadores = "";
@@ -65,8 +69,8 @@ class db {
 
         foreach($dados as $campo => $valor){
             $campos .= $sep . $campo;
-            $marcadores.= $sep . "?";
-            $vetorData[]=$valor;
+            $marcadores .= $sep . "?";
+            $vetorData[] = $valor;
             $sep = ",";
         }
         $sql = "INSERT INTO $this->table_name ($campos) VALUES ($marcadores);";
@@ -74,33 +78,34 @@ class db {
             $st = $this->conn->prepare($sql);
             $st->execute($vetorData);
         }catch(PDOException $e){
-            throw new Exception("Erro ao inserir: ", $e->getMessage());
+            // Corrigido: O construtor de Exception aceita apenas a string como primeiro parâmetro
+            throw new Exception("Erro ao inserir: " . $e->getMessage());
         }
-
     }
-    //UPDATE tabela SET 'campo1' = ?;
-    public function uptade($dados){
+
+    // UPDATE tabela SET campo = ? WHERE id = ?;
+    public function update($dados){ // Corrigido: nome da função ajustado de 'uptade' para 'update'
         $campos = "";
-        $marcadores = "";
         $vetorData = [];
         $sep = "";
 
         foreach($dados as $campo => $valor){
             if ($campo !== 'id'){
-
-                $campos .= $sep . " $campo= ?";
-                $vetorData[]=$valor;
+                $campos .= $sep . "$campo = ?";
+                $vetorData[] = $valor;
                 $sep = ", ";
             }
         }
-        $sql = "UPDATE $this->table_name SET $campos  WHERE id=?;";
+        
+        // Corrigido: Adicionamos o ID no final do vetor porque a query exige o ID no WHERE
+        $vetorData[] = $dados['id']; 
+        $sql = "UPDATE $this->table_name SET $campos WHERE id = ?;";
 
         try{
             $st = $this->conn->prepare($sql);
             $st->execute($vetorData);
         }catch(PDOException $e){
-            throw new Exception("Erro ao inserir: ", $e->getMessage());
+            throw new Exception("Erro ao atualizar: " . $e->getMessage());
         }
-
     }
 }
