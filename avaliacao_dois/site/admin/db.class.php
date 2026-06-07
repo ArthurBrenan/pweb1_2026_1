@@ -23,6 +23,9 @@ class db {
             case 'ingresso':
                 $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo ORDER BY nome";
                 break;
+            case 'artista':
+                $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo ORDER BY nome";
+                break;
             default:
                 // Busca genérica - tenta encontrar campos comuns
                 $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo";
