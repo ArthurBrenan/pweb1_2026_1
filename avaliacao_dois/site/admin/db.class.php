@@ -10,6 +10,31 @@ class db {
     private $table_name;
     private $conn; // conexão fica guardada para reutilizar
 
+        // Método de busca genérico
+    public function search($termo) {
+        // Verifica qual tabela está sendo usada e faz a busca nos campos apropriados
+        switch($this->table_name) {
+            case 'usuario':
+                $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR email LIKE :termo OR telefone LIKE :termo ORDER BY nome";
+                break;
+            case 'noticia':
+                $sql = "SELECT * FROM $this->table_name WHERE titulo LIKE :termo OR resumo LIKE :termo OR noticia_completa LIKE :termo ORDER BY id DESC";
+                break;
+            case 'ingresso':
+                $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo ORDER BY nome";
+                break;
+            default:
+                // Busca genérica - tenta encontrar campos comuns
+                $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo";
+                break;
+        }
+    
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([':termo' => "%$termo%"]);
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+    
+
     public function __construct($table_name)
     {
         $this->table_name = $table_name;

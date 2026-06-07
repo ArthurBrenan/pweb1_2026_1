@@ -25,8 +25,16 @@ if (isset($_GET['deletado'])) {
     $mensagem = "Ingresso deletado com sucesso!";
 }
 
-// Busca todos os dados atualizados para listar
-$dados = $db->all();
+// LÓGICA DE BUSCA
+$busca = '';
+$dados = [];
+
+if (!empty($_GET['busca'])) {
+    $busca = $_GET['busca'];
+    $dados = $db->search($busca);
+} else {
+    $dados = $db->all();
+}
 ?>
 
 <div class="row mb-3">
@@ -45,10 +53,37 @@ $dados = $db->all();
             </div>
         <?php endif; ?>
         
-        <a href="IngressoForm.php" class="btn btn-success">
-            <i class="fa-solid fa-plus"></i> Novo Ingresso
-            <a href="../../../index.php" class="btn btn-primary">Voltar</a>
-        </a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <a href="IngressoForm.php" class="btn btn-success">
+                    <i class="fa-solid fa-plus"></i> Novo Ingresso
+                </a>
+                <a href="../../../index.php" class="btn btn-primary">
+                    <i class="fa-solid fa-home"></i> Voltar
+                </a>
+            </div>
+            
+            <!-- Campo de Busca -->
+            <form method="GET" action="" class="d-flex">
+                <input type="text" name="busca" class="form-control me-2" placeholder="Buscar por nome ou descrição do ingresso..." value="<?php echo htmlspecialchars($busca); ?>" style="width: 350px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-search"></i> Buscar
+                </button>
+                <?php if(!empty($busca)): ?>
+                    <a href="IngressoList.php" class="btn btn-secondary ms-2">
+                        <i class="fa-solid fa-times"></i> Limpar
+                    </a>
+                <?php endif; ?>
+            </form>
+        </div>
+        
+        <!-- Mostrar resultado da busca -->
+        <?php if(!empty($busca)): ?>
+            <div class="alert alert-info">
+                Resultados para: <strong><?php echo htmlspecialchars($busca); ?></strong> 
+                (<?php echo count($dados); ?> encontrado(s))
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -80,7 +115,7 @@ $dados = $db->all();
                         <?php else: ?>
                             <span class="badge bg-danger">Esgotado</span>
                         <?php endif; ?>
-                     </td>
+                    </td>
                     <td class='text-center'>
                         <a href='IngressoForm.php?id=<?php echo $item->id; ?>' class='btn btn-sm btn-primary' title='Editar'>
                             Editar
@@ -96,7 +131,13 @@ $dados = $db->all();
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="7" class="text-center">Nenhum ingresso cadastrado.</td>
+                    <td colspan="7" class="text-center">
+                        <?php if(!empty($busca)): ?>
+                            Nenhum ingresso encontrado para "<strong><?php echo htmlspecialchars($busca); ?></strong>".
+                        <?php else: ?>
+                            Nenhum ingresso cadastrado.
+                        <?php endif; ?>
+                     </td>
                  </tr>
             <?php endif; ?>
         </tbody>

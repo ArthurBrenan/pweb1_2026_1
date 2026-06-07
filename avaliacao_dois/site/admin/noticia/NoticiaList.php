@@ -13,7 +13,7 @@ if (!empty($_GET['id_deletar'])) {
     try {
         $db->delete($_GET['id_deletar']);
         // Redireciona para a mesma página para evitar reenvio
-        header('Location: ../noticia/NoticiaList.php?deletado=1');
+        header('Location: NoticiaList.php?deletado=1');
         exit;
     } catch(Exception $e) {
         $erroDelete = "Erro ao deletar: " . $e->getMessage();
@@ -25,8 +25,16 @@ if (isset($_GET['deletado'])) {
     $mensagem = "Notícia deletada com sucesso!";
 }
 
-// Busca todos os dados atualizados para listar
-$dados = $db->all();
+// LÓGICA DE BUSCA
+$busca = '';
+$dados = [];
+
+if (!empty($_GET['busca'])) {
+    $busca = $_GET['busca'];
+    $dados = $db->search($busca);
+} else {
+    $dados = $db->all();
+}
 ?>
 
 <div class="row mb-3">
@@ -45,12 +53,37 @@ $dados = $db->all();
             </div>
         <?php endif; ?>
         
-        <a href="../noticia/NoticiaForm.php" class="btn btn-success">
-            <i class="fa-solid fa-plus"></i> Nova Notícia
-            <a href="../../../index.php" class="btn btn-primary">Voltar</a>
-        </a>
-
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <a href="NoticiaForm.php" class="btn btn-success">
+                    <i class="fa-solid fa-plus"></i> Nova Notícia
+                </a>
+                <a href="../../../index.php" class="btn btn-primary">
+                    <i class="fa-solid fa-home"></i> Voltar
+                </a>
+            </div>
+            
+            <!-- Campo de Busca -->
+            <form method="GET" action="" class="d-flex">
+                <input type="text" name="busca" class="form-control me-2" placeholder="Buscar por título, resumo ou notícia completa..." value="<?php echo htmlspecialchars($busca); ?>" style="width: 350px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-search"></i> Buscar
+                </button>
+                <?php if(!empty($busca)): ?>
+                    <a href="NoticiaList.php" class="btn btn-secondary ms-2">
+                        <i class="fa-solid fa-times"></i> Limpar
+                    </a>
+                <?php endif; ?>
+            </form>
+        </div>
         
+        <!-- Mostrar resultado da busca -->
+        <?php if(!empty($busca)): ?>
+            <div class="alert alert-info">
+                Resultados para: <strong><?php echo htmlspecialchars($busca); ?></strong> 
+                (<?php echo count($dados); ?> encontrado(s))
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -71,16 +104,16 @@ $dados = $db->all();
                 <tr>
                     <th scope='row'><?php echo $item->id; ?></th>
                     <td><?php echo htmlspecialchars($item->titulo); ?></td>
-                    <td><?php echo htmlspecialchars(substr($item->resumo, 0, 80)); ?>...</td>
-                    <td><?php echo htmlspecialchars(substr($item->noticia_completa, 0, 100)); ?>...</td>
+                    <td><?php echo htmlspecialchars(substr($item->resumo, 0, 80)); ?><?php echo strlen($item->resumo) > 80 ? '...' : ''; ?></td>
+                    <td><?php echo htmlspecialchars(substr($item->noticia_completa, 0, 100)); ?><?php echo strlen($item->noticia_completa) > 100 ? '...' : ''; ?></td>
                     <td class='text-center'>
-                        <a href='../noticia/NoticiaForm.php?id=<?php echo $item->id; ?>' class='btn btn-sm btn-primary' title='Editar'>
+                        <a href='NoticiaForm.php?id=<?php echo $item->id; ?>' class='btn btn-sm btn-primary' title='Editar'>
                             Editar
                         </a>
                         
-                        <a href='../noticia/NoticiaList.php?id_deletar=<?php echo $item->id; ?>' 
+                        <a href='NoticiaList.php?id_deletar=<?php echo $item->id; ?>' 
                             class='btn btn-sm btn-danger' 
-                            onclick='return confirm("Tem certeza que deseja excluir esta notícia?")'>
+                            onclick='return confirm("Tem certeza que deseja excluir a notícia \"<?php echo addslashes($item->titulo); ?>\"?")'>
                                 Excluir
                         </a>
                     </td>
@@ -88,7 +121,13 @@ $dados = $db->all();
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="5" class="text-center">Nenhuma notícia cadastrada.</td>
+                    <td colspan="5" class="text-center">
+                        <?php if(!empty($busca)): ?>
+                            Nenhuma notícia encontrada para "<strong><?php echo htmlspecialchars($busca); ?></strong>".
+                        <?php else: ?>
+                            Nenhuma notícia cadastrada.
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endif; ?>
         </tbody>
