@@ -13,19 +13,17 @@ $actionError = '';
 $errors = [];
 $data = null;
 
-// Se vier um ID via GET (URL), significa que estamos EDITANDO um usuário existente
 if (!empty($_GET['id'])) {
     $data = $db->find($_GET['id']);
 }
 
-// PROCESSAR O FORMULÁRIO QUANDO FOR SUBMETIDO
 if(!empty($_POST)){
     
-    // Guarda o que o usuário digitou para não perder os dados caso dê erro
     $data = (object) $_POST; 
     
     try {    
-        // Validações obrigatorias
+        $errors = [];
+        
         if(empty($_POST['nome'])){
             $errors[] = "<li>O nome é obrigatório</li>";
         }
@@ -36,12 +34,10 @@ if(!empty($_POST)){
             $errors[] = "<li>A idade é obrigatória</li>";
         }
         
-        // Na edição, a senha pode ser opcional. Mas no cadastro novo ela é obrigatória:
         if(empty($_POST['id']) && empty($_POST['senha'])){
             $errors[] = "<li>A senha é obrigatória para novos cadastros</li>";
         }
 
-        // Verificar se email já existe (apenas para novos cadastros)
         if(empty($_POST['id'])) {
             $usuarioExistente = $db->findBy('email', $_POST['email']);
             if($usuarioExistente) {
@@ -51,32 +47,25 @@ if(!empty($_POST)){
 
         if(empty($errors)){
             
-            // Prepara os dados para salvar
             $dadosParaSalvar = $_POST;
             
-            // CRITICAL: Remove o ID se estiver vazio (caso de novo cadastro)
-            if(isset($dadosParaSalvar['id']) && empty($dadosParaSalvar['id'])) {
-                unset($dadosParaSalvar['id']);
-            }
-            
-            // Criptografa a senha se foi fornecida
             if(!empty($dadosParaSalvar['senha'])) {
                 $dadosParaSalvar['senha'] = password_hash($dadosParaSalvar['senha'], PASSWORD_DEFAULT);
             } else {
-                // Se estiver editando e deixou a senha em branco, remove do array
                 unset($dadosParaSalvar['senha']); 
             }
 
-            // Se tiver ID preenchido no formulário, atualiza. Se não, cria um novo.
             if (!empty($dadosParaSalvar['id'])) {
-                $db->update($dadosParaSalvar);
-                $success = "Atualizado com sucesso!";
-            } else {
-                $db->store($dadosParaSalvar);
-                $success = "Registrado com sucesso!";
-            }
-            
-            // Redireciona após 2 segundos
+    $db->update($dadosParaSalvar);
+    $success = "Atualizado com sucesso!";
+} else {
+    // Remove o id se existir (está vazio)
+    if(isset($dadosParaSalvar['id'])) {
+        unset($dadosParaSalvar['id']);
+    }
+    $db->store($dadosParaSalvar);
+    $success = "Registrado com sucesso!";
+}
             echo "<script>
                     setTimeout(function() {
                         window.location.href = 'UsuarioList.php';
@@ -84,8 +73,6 @@ if(!empty($_POST)){
                   </script>";
         }
         
-    } catch (PDOException $e){
-        $actionError = "Erro no banco de dados: " . $e->getMessage();
     } catch (Exception $e){
         $actionError = "Erro: " . $e->getMessage();
     }
