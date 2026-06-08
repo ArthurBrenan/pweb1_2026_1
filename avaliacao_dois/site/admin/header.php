@@ -24,10 +24,10 @@
             <nav class="navbar d-flex justify-content-between rounded">
                 <div class="nav-scroller d-flex justify-content-around w-100"
                     style=" font-family: sans-serif; font-size: 1rem; color: #e0e0d1; letter-spacing: 0,1em; font-weight: 700; text-shadow: 2px 2px 0px rgba(0, 0, 0, 1); margin: 0;">
-                    <a class="text-decoration-none" href="index.html" style="color: #e0e0d1;">PÁGINA INICIAL</a>
-                    <a class="text-decoration-none" href="paginas/sobre.html" style="color: #e0e0d1;">SOBRE NÓS</a>
-                    <a class="text-decoration-none" href="paginas/contato.html" style="color: #e0e0d1;">CONTATO</a>
-                    <a class="text-decoration-none" href="paginas/diversa.html" style="color: #e0e0d1;">DIVERSA</a>
+                    <a class="text-decoration-none" href="pweb1_2026_1/avaliacao_dois/site/admin/estrutura/index.html" style="color: #e0e0d1;">PÁGINA INICIAL</a>
+                    <a class="text-decoration-none" href="pweb1_2026_1/avaliacao_dois/site/admin/estrutura/sobre.html" style="color: #e0e0d1;">SOBRE NÓS</a>
+                    <a class="text-decoration-none" href="pweb1_2026_1/avaliacao_dois/site/admin/estrutura/contato.html" style="color: #e0e0d1;">CONTATO</a>
+                    <a class="text-decoration-none" href="diversa.html" style="color: #e0e0d1;">DIVERSA</a>
                 </div>
             </nav>
         </div>

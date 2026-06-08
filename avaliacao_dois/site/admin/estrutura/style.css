@@ -273,3 +273,55 @@
     border-color: #f1c40f;
     color: #f1c40f;
 }
+
+/* Classes para o line-up */
+.lineup-container {
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'sans-serif', serif;
+    text-transform: uppercase;
+}
+
+.tier {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tier-1 h1 {
+    font-size: clamp(3rem, 10vw, 6rem);
+    margin: 0;
+    color: #f1c40f;
+}
+
+.tier-2 h2 {
+    font-size: clamp(1.5rem, 6vw, 3rem);
+    margin: 0;
+}
+
+.tier-3 h3 {
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    font-weight: normal;
+    color: #ccc;
+}
+
+.tier-4 {
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.tier-4 span {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.tier-4 span:not(:last-child)::after {
+    content: "|";
+    margin-left: 10px;
+    color: #444;
+}
