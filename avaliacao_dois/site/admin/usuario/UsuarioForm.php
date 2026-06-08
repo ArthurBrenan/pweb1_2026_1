@@ -146,7 +146,7 @@ if(!empty($_POST)){
                                 style="border-radius: 30px; letter-spacing: 1px;">
                             <i class="fa-solid fa-check"></i> ENVIAR
                         </button>
-                        <a href="UsuarioList.php" class="btn btn-outline-secondary px-4 py-2" 
+                        <a href="../../../index.php" class="btn btn-outline-secondary px-4 py-2" 
                            style="border-radius: 30px; letter-spacing: 1px; color: #fff; border-color: #555;">
                             <i class="fa-solid fa-arrow-left"></i> VOLTAR
                         </a>
