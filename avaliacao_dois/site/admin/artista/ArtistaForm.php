@@ -1,9 +1,16 @@
 <?php
+// Primeiro, iniciamos a sessão
+session_start();
+
+// Verificar se usuário está logado
+if(!isset($_SESSION['usuario_id'])) {
+    header('Location: ../login.php');
+    exit;
+}
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include '../header.php';
-include '../autenticacao.php';
 include_once "../db.class.php";
 
 $db = new db('artista');
@@ -119,70 +126,275 @@ if(!empty($_POST)){
         $actionError = "Erro: " . $e->getMessage();
     }
 }
+
+// Agora sim, depois de todo o processamento PHP, incluímos o header
+include '../header2.php';
 ?>
 
 <style>
     body {
-        background-color: #212529 !important;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
     }
-    /* Padronização de Inputs Dark */
-    .form-dark {
-        background-color: #333 !important;
-        border: 1px solid #555 !important;
-        color: white !important;
-        border-radius: 10px;
-        padding: 12px;
+    
+    /* Card estilizado */
+    .form-card {
+        background: linear-gradient(145deg, #1e1e1e, #161616);
+        border-radius: 30px;
+        border: 1px solid #2c2c2c;
+        transition: all 0.3s ease;
+        padding: 40px;
     }
-    .form-dark:focus {
-        border-color: #f1c40f !important;
-        box-shadow: 0 0 0 0.25rem rgba(241, 196, 15, 0.25) !important;
+    
+    .form-card:hover {
+        border-color: #f1c40f;
+        box-shadow: 0 10px 30px rgba(241,196,15,0.1);
     }
-    .form-label-gold {
+    
+    /* Título */
+    .form-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: #f1c40f;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .title-divider {
+        width: 80px;
+        height: 3px;
+        background: #f1c40f;
+        margin: 15px auto;
+        border-radius: 3px;
+    }
+    
+    /* Labels */
+    .form-label-custom {
         color: #f1c40f;
         letter-spacing: 1px;
         font-weight: bold;
+        margin-bottom: 8px;
+        display: block;
     }
-    /* Estilo para a prévia da imagem do artista */
+    
+    /* Campos de input */
+    .form-control-custom {
+        background-color: #252525;
+        border: 1px solid #2c2c2c;
+        color: #e0e0e0;
+        border-radius: 12px;
+        padding: 12px 15px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control-custom:focus {
+        background-color: #2c2c2c;
+        border-color: #f1c40f;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(241,196,15,0.2);
+        color: #fff;
+    }
+    
+    .form-control-custom::placeholder {
+        color: #666;
+    }
+    
+    /* Textarea */
+    textarea.form-control-custom {
+        resize: vertical;
+    }
+    
+    /* File input */
+    input[type="file"].form-control-custom {
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+    
+    input[type="file"].form-control-custom::-webkit-file-upload-button {
+        background: #f1c40f;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    
+    /* Botões */
+    .btn-submit {
+        background: linear-gradient(145deg, #f1c40f, #d4a00a);
+        color: #1a1a1a;
+        font-weight: bold;
+        padding: 12px 30px;
+        border-radius: 50px;
+        letter-spacing: 2px;
+        border: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    .btn-submit:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(241,196,15,0.3);
+        background: linear-gradient(145deg, #ffd700, #e6b800);
+    }
+    
+    .back-link {
+        color: #888;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+        margin-top: 15px;
+    }
+    
+    .back-link:hover {
+        color: #f1c40f;
+    }
+    
+    .back-link span {
+        color: #f1c40f;
+    }
+    
+    /* Alertas */
+    .alert-custom {
+        border-radius: 12px;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border: none;
+    }
+    
+    .alert-success-custom {
+        background: rgba(40, 167, 69, 0.15);
+        border-left: 3px solid #28a745;
+        color: #28a745;
+    }
+    
+    .alert-danger-custom {
+        background: rgba(220, 53, 69, 0.15);
+        border-left: 3px solid #dc3545;
+        color: #dc3545;
+    }
+    
+    .alert-danger-custom ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    .alert-danger-custom li {
+        color: #dc3545;
+    }
+    
+    /* Helper text */
+    .helper-text {
+        color: #666;
+        font-size: 0.7rem;
+        margin-top: 5px;
+        display: block;
+    }
+    
+    /* Pré-visualização da imagem */
+    .image-preview-container {
+        background-color: #1a1a1a;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #2c2c2c;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
     .artist-preview {
-        border: 2px solid #555;
-        border-radius: 10px;
-        background-color: #222;
-        padding: 5px;
-        max-width: 140px;
-        max-height: 140px;
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
         object-fit: cover;
+        border: 2px solid #f1c40f;
+    }
+    
+    .image-info {
+        flex: 1;
+    }
+    
+    .badge-active {
+        background: rgba(40, 167, 69, 0.2);
+        color: #28a745;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    
+    .image-name {
+        color: #a0a0a0;
+        font-size: 0.75rem;
+        word-break: break-all;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .form-card {
+            padding: 25px;
+        }
+        
+        .form-title {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+        }
+        
+        .btn-submit {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .artist-preview {
+            width: 60px;
+            height: 60px;
+        }
     }
 </style>
 
-<div style="background-color: #212529; min-height: 100vh; padding: 40px 20px;">
+<div style="min-height: 80vh; padding: 40px 20px; display: flex; align-items: center;">
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-10 col-lg-8">
                 
-                <div style="background-color: #1a1a1a; border-radius: 20px; border: 1px solid #333; padding: 40px;">
+                <!-- Card com estilo padronizado -->
+                <div class="form-card">
                     
+                    <!-- Título estilizado -->
                     <div class="text-center mb-4">
-                        <h1 style="color: #f1c40f; letter-spacing: 3px; font-size: 1.8rem; text-transform: uppercase; margin: 0;">
+                        <h1 class="form-title">
                             <?php echo !empty($data->id) ? 'EDITAR ARTISTA' : 'CADASTRO DE ARTISTA'; ?>
                         </h1>
-                        <div style="width: 60px; height: 2px; background: #f1c40f; margin: 15px auto;"></div>
+                        <div class="title-divider"></div>
                     </div>
                     
+                    <!-- Mensagens -->
                     <?php if(!empty($success)): ?>
-                        <div class="alert alert-success" style="background-color: #28a745; border: none; color: white; border-radius: 10px;">
+                        <div class="alert-custom alert-success-custom">
                             <?php echo $success; ?>
                         </div>
                     <?php endif; ?>
                     
                     <?php if(!empty($actionError)): ?>
-                        <div class="alert alert-danger" style="background-color: #dc3545; border: none; color: white; border-radius: 10px;">
+                        <div class="alert-custom alert-danger-custom">
                             <?php echo $actionError; ?>
                         </div>
                     <?php endif; ?>
                     
                     <?php if(!empty($errors)): ?>
-                        <div class="alert alert-danger" style="background-color: #dc3545; border: none; color: white; border-radius: 10px;">
-                            <ul style="margin: 0; padding-left: 20px;">
+                        <div class="alert-custom alert-danger-custom">
+                            <ul>
                                 <?php foreach($errors as $error): ?>
                                     <?php echo $error; ?>
                                 <?php endforeach; ?>
@@ -190,53 +402,51 @@ if(!empty($_POST)){
                         </div>
                     <?php endif; ?>
                     
+                    <!-- Formulário -->
                     <form action="" method="post" enctype="multipart/form-data">
                         
                         <input type="hidden" name="id" value="<?php echo isset($data->id) ? $data->id : ''; ?>">
 
-                        <div class="row"> 
-                            <div class="col-12 mb-3">
-                                <label for="nome" class="form-label form-label-gold">NOME DO ARTISTA</label>
-                                <input type="text" name="nome" class="form-control form-dark" 
-                                       value="<?php echo isset($data->nome) ? htmlspecialchars($data->nome) : ''; ?>"
-                                       placeholder="Ex: Jorge & Mateus, Beyoncé, Alok...">
-                                <small style="color: #888; display: block; margin-top: 4px;">Nome artístico ou nome da banda.</small>
-                            </div>
-                            
-                            <div class="col-12 mb-3">
-                                <label for="descricao" class="form-label form-label-gold">DESCRIÇÃO / BIOGRAFIA</label>
-                                <textarea name="descricao" class="form-control form-dark" rows="5" 
-                                          placeholder="Conte um pouco sobre a história, gênero musical e sucessos do artista..."><?php echo isset($data->descricao) ? htmlspecialchars($data->descricao) : ''; ?></textarea>
-                                <small style="color: #888; display: block; margin-top: 4px;">Informações complementares que aparecerão no perfil do artista.</small>
-                            </div>
-
-                            <div class="col-12 mb-4">
-                                <label for="imagem" class="form-label form-label-gold">FOTO DO ARTISTA</label>
-                                
-                                <?php if(!empty($data->imagem)): ?>
-                                    <div class="mb-3 d-flex align-items-center gap-3" style="background-color: #252525; padding: 15px; border-radius: 12px; border: 1px solid #444;">
-                                        <img src="../uploads/<?php echo $data->imagem; ?>" alt="Imagem atual" class="artist-preview">
-                                        <div>
-                                            <span class="badge bg-warning text-dark mb-1 fw-bold">Imagem Ativa</span>
-                                            <small class="d-block" style="color: #bbb; word-break: break-all;"><?php echo $data->imagem; ?></small>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <input type="file" name="imagem" class="form-control form-dark" accept="image/jpeg,image/png,image/gif,image/webp">
-                                <small style="color: #888; display: block; margin-top: 4px;">Formatos suportados: JPG, PNG, GIF, WEBP. Tamanho limite: 5MB</small>
-                            </div>
+                        <div class="mb-3">
+                            <label for="nome" class="form-label-custom">NOME DO ARTISTA</label>
+                            <input type="text" name="nome" class="form-control-custom" 
+                                   value="<?php echo isset($data->nome) ? htmlspecialchars($data->nome) : ''; ?>"
+                                   placeholder="Ex: Tim Maia, Freddie Mercury, Amy Winehouse...">
+                            <small class="helper-text">Nome artístico do artista ou banda.</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descricao" class="form-label-custom">DESCRIÇÃO / BIOGRAFIA</label>
+                            <textarea name="descricao" class="form-control-custom" rows="5" 
+                                      placeholder="Conte um pouco sobre a história, gênero musical e sucessos do artista..."><?php echo isset($data->descricao) ? htmlspecialchars($data->descricao) : ''; ?></textarea>
+                            <small class="helper-text">Informações complementares que aparecerão no perfil do artista.</small>
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-warning fw-bold py-2" style="border-radius: 30px; letter-spacing: 2px;">
-                                <?php echo !empty($data->id) ? 'ATUALIZAR PERFIL' : 'CADASTRAR ARTISTA'; ?>
-                            </button>
-                            <div class="text-center mt-3">
-                                <a href="ArtistaList.php" style="color: #888; text-decoration: none; font-size: 0.9rem;">
-                                    &larr; Voltar para a <span style="color: #f1c40f;">Lista de Artistas</span>
-                                </a>
-                            </div>
+                        <div class="mb-4">
+                            <label for="imagem" class="form-label-custom">FOTO DO ARTISTA</label>
+                            
+                            <?php if(!empty($data->imagem)): ?>
+                                <div class="image-preview-container">
+                                    <img src="../uploads/<?php echo $data->imagem; ?>" alt="Imagem atual" class="artist-preview">
+                                    <div class="image-info">
+                                        <div class="badge-active">Imagem Atual</div>
+                                        <div class="image-name"><?php echo $data->imagem; ?></div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <input type="file" name="imagem" class="form-control-custom" accept="image/jpeg,image/png,image/gif,image/webp">
+                            <small class="helper-text">Formatos suportados: JPG, PNG, GIF, WEBP. Tamanho limite: 5MB</small>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <?php echo !empty($data->id) ? 'ATUALIZAR ARTISTA' : 'CADASTRAR ARTISTA'; ?>
+                        </button>
+                        
+                        <div class="text-center mt-3">
+                            <a href="ArtistaList.php" class="back-link">
+                                ← Voltar para a <span>Lista de Artistas</span>
+                            </a>
                         </div>
                     </form>
                 </div>

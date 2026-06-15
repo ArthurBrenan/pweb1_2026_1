@@ -191,22 +191,22 @@
     
     <div class="menu-option">
         <i class="fas fa-users"></i>
-        <a href="../../usuario/UsuarioList.php">GERENCIAR USUÁRIOS</a>
+        <a href="../usuario/UsuarioList.php">GERENCIAR USUÁRIOS</a>
     </div>
     
     <div class="menu-option">
         <i class="fas fa-newspaper"></i>
-        <a href="../../noticia/NoticiaList.php">GERENCIAR NOTÍCIAS</a>
+        <a href="../noticia/NoticiaList.php">GERENCIAR NOTÍCIAS</a>
     </div>
     
     <div class="menu-option">
         <i class="fas fa-ticket-alt"></i>
-        <a href="../../ingresso/IngressoList.php">GERENCIAR INGRESSOS</a>
+        <a href="../ingresso/IngressoList.php">GERENCIAR INGRESSOS</a>
     </div>
     
     <div class="menu-option">
         <i class="fas fa-microphone-alt"></i>
-        <a href="../../artista/ArtistaList.php">GERENCIAR ARTISTAS</a>
+        <a href="../artista/ArtistaList.php">GERENCIAR ARTISTAS</a>
     </div>
       
     <div class="menu-divider"></div>
@@ -237,10 +237,10 @@
         <nav class="navbar d-flex justify-content-between rounded">
             <div class="nav-scroller d-flex justify-content-around w-100"
                 style="font-family: sans-serif; font-size: 1rem; color: #e0e0d1; letter-spacing: 0.1em; font-weight: 700; text-shadow: 2px 2px 0px rgba(0, 0, 0, 1); margin: 0;">
-                <a class="text-decoration-none" href="index.php" style="color: #e0e0d1;">PÁGINA INICIAL</a>
-                <a class="text-decoration-none" href="sobre.php" style="color: #e0e0d1;">SOBRE NÓS</a>
-                <a class="text-decoration-none" href="contato.php" style="color: #e0e0d1;">CONTATO</a>
-                <a class="text-decoration-none" href="diversa.php" style="color: #e0e0d1;">DIVERSA</a>
+                <a class="text-decoration-none" href="../estrutura/paginas/index.php" style="color: #e0e0d1;">PÁGINA INICIAL</a>
+                <a class="text-decoration-none" href="../estrutura/paginas/sobre.php" style="color: #e0e0d1;">SOBRE NÓS</a>
+                <a class="text-decoration-none" href="../estrutura/paginas/contato.php" style="color: #e0e0d1;">CONTATO</a>
+                <a class="text-decoration-none" href="../estrutura/paginas/diversa.php" style="color: #e0e0d1;">DIVERSA</a>
             
             </div>
         </nav>
