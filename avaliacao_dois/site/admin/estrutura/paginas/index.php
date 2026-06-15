@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Verifica loggin
+// Verificar se usuário está logado
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../admin/login.php');
     exit;
@@ -440,7 +440,7 @@ if ($diferenca < 0) {
                 <?php endif; ?>
             </div>
             
-            <!-- Grid de Ingressos e Noticias -->
+            <!-- contagem regr., ingressos e noticias -->
             <div class="row-custom">
                 <div class="col-ingressos">
                     <div class="custom-card p-4">
@@ -473,7 +473,7 @@ if ($diferenca < 0) {
 
                         <?php if(!empty($ingressos)): ?>
                             <div class="ingressos-grid">
-                                <?php foreach(array_slice($ingressos, 0, 4) as $ingresso): ?>
+                                <?php foreach(array_slice($ingressos, 0, 6) as $ingresso): ?>
                                 <div class="ingresso-card">
                                     <div class="card-body p-3">
                                         <h6 class="card-title text-warning fw-bold mb-2"><?php echo strtoupper(htmlspecialchars($ingresso->nome)); ?></h6>
@@ -495,7 +495,7 @@ if ($diferenca < 0) {
                                 <?php endforeach; ?>
                             </div>
                             
-                            <?php if(count($ingressos) > 4): ?>
+                            <?php if(count($ingressos) > 6): ?>
                                 <div class="text-center mt-4">
                                     <a href="../../ingresso/IngressoList.php" class="text-warning" style="font-size: 0.8rem;">+ <?php echo (count($ingressos) - 4); ?> outros ingressos disponiveis</a>
                                 </div>
