@@ -43,6 +43,9 @@ if(!empty($_POST)){
         if(empty($_POST['noticia_completa'])){
             $errors[] = "<li>A notícia completa é obrigatória</li>";
         }
+        if(empty($_POST['data_publicacao'])){
+            $errors[] = "<li>A data de publicação é obrigatória</li>";
+        }
 
         if(empty($errors)){
             
@@ -50,7 +53,8 @@ if(!empty($_POST)){
             $dadosParaSalvar = [
                 'titulo' => $_POST['titulo'],
                 'resumo' => $_POST['resumo'],
-                'noticia_completa' => $_POST['noticia_completa']
+                'noticia_completa' => $_POST['noticia_completa'],
+                'data_publicacao' => $_POST['data_publicacao']
             ];
 
             // Se tiver ID preenchido no formulário, atualiza. Se não, cria um novo.
@@ -233,6 +237,19 @@ include '../header2.php';
         display: block;
     }
     
+    /* Row de campos lado a lado */
+    .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .form-row .form-group {
+        flex: 1;
+        min-width: 150px;
+    }
+    
     /* Responsividade */
     @media (max-width: 768px) {
         .form-card {
@@ -247,6 +264,11 @@ include '../header2.php';
         .btn-submit {
             padding: 10px 20px;
             font-size: 0.9rem;
+        }
+        
+        .form-row {
+            flex-direction: column;
+            gap: 15px;
         }
     }
 </style>
@@ -309,11 +331,21 @@ include '../header2.php';
                             <small class="helper-text">Máximo de 100 caracteres</small>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="noticia_completa" class="form-label-custom">NOTÍCIA COMPLETA</label>
                             <textarea name="noticia_completa" class="form-control-custom" rows="8" 
                                       placeholder="Digite o conteúdo completo da matéria aqui..."><?php echo isset($data->noticia_completa) ? htmlspecialchars($data->noticia_completa) : ''; ?></textarea>
                             <small class="helper-text">Máximo de 1000 caracteres</small>
+                        </div>
+
+                        <!-- Data de Publicação -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="data_publicacao" class="form-label-custom">DATA DE PUBLICAÇÃO</label>
+                                <input type="date" name="data_publicacao" class="form-control-custom" 
+                                       value="<?php echo isset($data->data_publicacao) ? $data->data_publicacao : date('Y-m-d'); ?>">
+                                <small class="helper-text">Data que a notícia será/publicou</small>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn-submit">

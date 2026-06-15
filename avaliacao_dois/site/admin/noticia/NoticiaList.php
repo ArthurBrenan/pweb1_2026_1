@@ -41,6 +41,15 @@ if (!empty($_GET['busca'])) {
     $dados = $db->all();
 }
 
+// Ordenar notícias por data de publicação (mais recente primeiro)
+if (!empty($dados)) {
+    usort($dados, function($a, $b) {
+        $dataA = isset($a->data_publicacao) ? strtotime($a->data_publicacao) : 0;
+        $dataB = isset($b->data_publicacao) ? strtotime($b->data_publicacao) : 0;
+        return $dataB - $dataA;
+    });
+}
+
 // Agora sim, depois de todo o processamento PHP, incluímos o header
 include '../header2.php';
 ?>
@@ -213,35 +222,52 @@ include '../header2.php';
     /* Resumo da notícia */
     .news-resumo {
         color: #a0a0a0;
-        max-width: 400px;
+        max-width: 300px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
     
+    /* Data de publicação */
+    .news-data {
+        color: #888;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+    
     /* Responsividade */
+    @media (max-width: 992px) {
+        .news-resumo {
+            max-width: 150px;
+        }
+    }
+    
     @media (max-width: 768px) {
         .page-title {
             font-size: 1.5rem;
         }
         
         .custom-table thead th {
-            font-size: 0.7rem;
-            padding: 8px;
+            font-size: 0.65rem;
+            padding: 6px;
         }
         
         .custom-table tbody td {
-            font-size: 0.7rem;
-            padding: 8px;
+            font-size: 0.65rem;
+            padding: 6px;
         }
         
         .btn-sm {
-            font-size: 0.6rem;
-            padding: 3px 6px;
+            font-size: 0.55rem;
+            padding: 3px 5px;
         }
         
         .news-resumo {
-            max-width: 150px;
+            max-width: 80px;
+        }
+        
+        .news-data {
+            font-size: 0.6rem;
         }
     }
 </style>
@@ -296,9 +322,10 @@ include '../header2.php';
             <table class="table m-0 align-middle">
                 <thead>
                     <tr>
-                        <th class="ps-3" style="width: 70px;">ID</th>
+                        <th class="ps-3" style="width: 60px;">ID</th>
                         <th style="width: 250px;">TÍTULO</th>
                         <th>RESUMO</th>
+                        <th style="width: 120px; text-align: center;">DATA</th>
                         <th class="text-center" style="width: 180px;">AÇÕES</th>
                     </tr>
                 </thead>
@@ -309,6 +336,15 @@ include '../header2.php';
                             <td class="ps-3 news-id"><?php echo $item->id; ?></td>
                             <td class="news-title"><?php echo htmlspecialchars($item->titulo); ?></td>
                             <td class="news-resumo"><?php echo htmlspecialchars($item->resumo); ?></td>
+                            <td class="news-data text-center">
+                                <?php 
+                                if(!empty($item->data_publicacao)) {
+                                    echo date('d/m/Y', strtotime($item->data_publicacao));
+                                } else {
+                                    echo '---';
+                                }
+                                ?>
+                            </td>
                             <td class="text-center">
                                 <a href='noticiaForm.php?id=<?php echo $item->id; ?>' class='btn btn-outline-warning btn-sm' style="border-radius: 8px; margin-right: 5px;">
                                     Editar
@@ -322,7 +358,7 @@ include '../header2.php';
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center py-5">
+                            <td colspan="5" class="text-center py-5">
                                 <em class="text-muted">Nenhuma notícia encontrada no sistema.</em>
                             </td>
                         </tr>
