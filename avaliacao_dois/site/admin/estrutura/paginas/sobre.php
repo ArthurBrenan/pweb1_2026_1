@@ -13,7 +13,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Banner de introdução */
         .hero-banner {
             position: relative;
             background: linear-gradient(145deg, #f1c40f, #d4a00a);
@@ -102,7 +101,7 @@
             text-align: justify;
         }
         
-        /* Accordion estilizado */
+        /* Accordion  */
         .accordion {
             --bs-accordion-bg: #f5f0e8;
             --bs-accordion-border-color: #d4c5a0;
@@ -199,7 +198,7 @@
 
 
 <main class="container my-5">
-    <!-- História e Comitê -->
+    <!-- História e Comite -->
     <div class="row g-4 mb-5">
         <div class="col-md-8">
             <div class="info-card">

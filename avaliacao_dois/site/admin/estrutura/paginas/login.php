@@ -1,14 +1,12 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Depois, verificamos se já está logado (isso precisa vir ANTES de qualquer saída HTML)
+// verificar log
 if(isset($_SESSION['usuario_id'])) {
     header('Location: /pweb1_2026_1/avaliacao_dois/site/admin/estrutura/paginas/index.php');
     exit;
 }
 
-// Agora sim, incluímos os arquivos necessários
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/db.class.php';
 
 $db = new db('usuario');
@@ -40,7 +38,7 @@ if(!empty($_POST)){
 
                 $success = "Usuário logado com sucesso!";
                 
-                // Redireciona para o index
+                // Redireciona
                 header('Location: /pweb1_2026_1/avaliacao_dois/site/admin/estrutura/paginas/index.php');
                 exit;
             } else {
@@ -55,7 +53,7 @@ if(!empty($_POST)){
     }
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/header.php';
 ?>
 
@@ -66,7 +64,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admi
         min-height: 100vh;
     }
     
-    /* Card de login estilizado */
     .login-card {
         background: linear-gradient(145deg, #1e1e1e, #161616);
         border-radius: 30px;
@@ -203,7 +200,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admi
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-6 col-lg-5">
                 
-                <!-- Card de login -->
+                <!-- Card login -->
                 <div class="login-card" style="padding: 40px;">
                     
                     <!-- Título -->

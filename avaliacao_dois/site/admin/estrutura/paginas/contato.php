@@ -13,7 +13,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Banner de introdução */
         .hero-banner {
             position: relative;
             background: linear-gradient(145deg, #f1c40f, #d4a00a);
@@ -45,7 +44,7 @@
             line-height: 1.6;
         }
         
-        /* Accordion - cabeçalho off-white com texto preto, corpo preto */
+        /* Accordion*/
         .accordion {
             --bs-accordion-bg:  #e0e0d1;
             --bs-accordion-border-color: #d4c5a0;
@@ -209,14 +208,14 @@
 <main class="container my-5">
     <div class="row row-cols-1 row-cols-lg-2 g-4">
         
-        <!-- Coluna da Esquerda - Como chegar -->
+        <!-- Coluna da Esquerda-->
         <div class="col">
             <div class="map-card">
                 <div class="map-header">
                     <h3>COMO CHEGAR?</h3>
                 </div>
                 <div class="p-4">
-                    <!-- Accordion Bootstrap -->
+                    <!-- Accordion  -->
                     <div class="accordion" id="accordionComoChegar">
                         
                         <!-- Accordion Vivos -->
@@ -315,7 +314,7 @@
             </div>
         </div>
         
-        <!-- Coluna da Direita - Mapa -->
+        <!-- Coluna da Direita -->
         <div class="col">
             <div class="map-card">
                 <div class="map-header">
@@ -333,7 +332,7 @@
                         </a>
                     </div>
                     
-                    <!-- Informações adicionais -->
+                    <!-- Infos -->
                     <div class="warning-text mt-4">
                         <strong>Horário de funcionamento:</strong><br>
                         Portões abrem às 16h · Último show às 04h<br>

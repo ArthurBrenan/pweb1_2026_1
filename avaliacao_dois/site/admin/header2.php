@@ -25,7 +25,7 @@
             transform: scale(1.05);
         }
         
-        /* Aside (sidebar) */
+        /* Aside */
         .aside-menu {
             position: fixed;
             top: 0;
@@ -174,7 +174,7 @@
 <!-- Overlay -->
 <div id="asideOverlay" class="aside-overlay" onclick="toggleAside()"></div>
 
-<!-- Aside Menu -->
+<!-- Menu -->
 <div id="asideMenu" class="aside-menu">
     <div class="aside-header">
         <h3><i class="fas fa-cog"></i> MENU</h3>

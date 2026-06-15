@@ -366,10 +366,10 @@ include '../header2.php';
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-10 col-lg-8">
                 
-                <!-- Card com estilo padronizado -->
+                <!-- Card  -->
                 <div class="form-card">
                     
-                    <!-- Título estilizado -->
+                    <!-- Título  -->
                     <div class="text-center mb-4">
                         <h1 class="form-title">
                             <?php echo !empty($data->id) ? 'EDITAR ARTISTA' : 'CADASTRO DE ARTISTA'; ?>

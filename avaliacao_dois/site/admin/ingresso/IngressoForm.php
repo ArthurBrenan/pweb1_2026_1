@@ -1,8 +1,7 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Verificar se usuário está logado
+// Verificar log
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../login.php');
     exit;
@@ -20,19 +19,18 @@ $actionError = '';
 $errors = [];
 $data = null;
 
-// Se vier um ID via GET (URL), significa que estamos EDITANDO um ingresso existente
+// Se vier  ID de GET (URL), estamos EDITANDO
 if (!empty($_GET['id'])) {
     $data = $db->find($_GET['id']);
 }
 
-// PROCESSAR O FORMULÁRIO QUANDO FOR SUBMETIDO
+// Processso do formulario subsmetido
 if(!empty($_POST)){
     
-    // Guarda o que o usuário digitou para não perder os dados caso dê erro
     $data = (object) $_POST; 
     
     try {    
-        // Validações obrigatórias
+        // Validações 
         if(empty($_POST['nome'])){
             $errors[] = "<li>O nome do ingresso é obrigatório</li>";
         }
@@ -52,7 +50,7 @@ if(!empty($_POST)){
 
         if(empty($errors)){
             
-            // Prepara os dados para salvar
+            // Prepara os dados p salvar
             $dadosParaSalvar = [
                 'nome' => $_POST['nome'],
                 'descricao' => $_POST['descricao'],
@@ -60,7 +58,7 @@ if(!empty($_POST)){
                 'valor' => str_replace(',', '.', $_POST['valor'])
             ];
 
-            // Se tiver ID preenchido no formulário, atualiza. Se não, cria um novo.
+            // Se tiver ID no formulário atualiza. Snn, cria.
             if (!empty($_POST['id'])) {
                 $dadosParaSalvar['id'] = $_POST['id'];
                 $db->update($dadosParaSalvar);
@@ -70,7 +68,7 @@ if(!empty($_POST)){
                 $success = "Ingresso cadastrado com sucesso! Redirecionando...";
             }
             
-            // Redireciona após 2 segundos
+            // Redireciiionar
             echo "<script>
                     setTimeout(function() {
                         window.location.href = 'IngressoList.php';
@@ -85,7 +83,7 @@ if(!empty($_POST)){
     }
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+// header
 include '../header2.php';
 ?>
 
@@ -96,7 +94,7 @@ include '../header2.php';
         min-height: 100vh;
     }
     
-    /* Card estilizado */
+    /* Card  */
     .form-card {
         background: linear-gradient(145deg, #1e1e1e, #161616);
         border-radius: 30px;
@@ -240,7 +238,7 @@ include '../header2.php';
         display: block;
     }
     
-    /* Row de campos lado a lado */
+    /* Row de campos */
     .form-row {
         display: flex;
         gap: 20px;
@@ -281,10 +279,10 @@ include '../header2.php';
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-10 col-lg-8">
                 
-                <!-- Card com estilo padronizado -->
+                <!-- Card  -->
                 <div class="form-card">
                     
-                    <!-- Título estilizado -->
+                    <!-- Título -->
                     <div class="text-center mb-4">
                         <h1 class="form-title">
                             <?php echo !empty($data->id) ? 'EDITAR INGRESSO' : 'CADASTRO DE INGRESSO'; ?>

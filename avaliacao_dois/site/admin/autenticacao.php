@@ -30,38 +30,38 @@ function showValidationError($errors) {
     }
 }
 
-// FUNÇÕES ADICIONAIS PARA O LOGIN
+// funcao p o login
 
 function redirect($url) {
     header("Location: $url");
     exit;
 }
 
-// Verifica se o usuário está logado
+// Verifica login
 function isLoggedIn() {
     return isset($_SESSION['usuario_id']);
 }
 
-// Se NÃO estiver logado, redireciona para o login
+// Se nao login, redireciona p login
 function requireLogin() {
     if (!isLoggedIn()) {
         redirect('login.php');
     }
 }
 
-// Se já estiver logado, redireciona para o index
+// Se já login, redireciona p index
 function requireLogout() {
     if (isLoggedIn()) {
         redirect('index.php');
     }
 }
 
-// Pega o nome do usuário logado
+// Pega nome usuario
 function getUsuarioNome() {
     return $_SESSION['usuario_nome'] ?? 'Visitante';
 }
 
-// Pega o ID do usuário logado
+// Pega ID usuário 
 function getUsuarioId() {
     return $_SESSION['usuario_id'] ?? null;
 }

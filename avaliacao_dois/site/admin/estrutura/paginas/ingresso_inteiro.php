@@ -1,20 +1,18 @@
 <?php
 session_start();
 
-// Verificar se usuário está logado
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../admin/login.php');
     exit;
 }
 
-// Incluir classes necessárias - ajustando caminhos
+// Incluir classes necessárias
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/db.class.php';
 
-// Instanciar classes
 $usuarioDB = new db('usuario');
 $ingressoDB = new db('ingresso');
 
-// Buscar dados do usuário logado
+// Buscar dados do usuário
 $usuario = $usuarioDB->find($_SESSION['usuario_id']);
 
 // Processar compra
@@ -26,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comprar'])) {
     $quantidade = (int)$_POST['quantidade'];
     $pagamento = $_POST['pagamento'];
     
-    // Buscar o ingresso no banco
+    // Buscar ingresso 
     $ingressos = $ingressoDB->all();
     $ingresso_selecionado = null;
     
@@ -44,10 +42,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comprar'])) {
             $atualizado = $ingressoDB->update($ingresso_selecionado->id, ['quantidade' => $novo_estoque]);
             
             if($atualizado) {
-                $mensagem = "✅ Compra concluída com sucesso! Você comprou $quantidade ingresso(s) para \"$tipo_ingresso\". Pagamento: $pagamento";
+                $mensagem = " Compra concluída com sucesso! Você comprou $quantidade ingresso(s) para \"$tipo_ingresso\". Pagamento: $pagamento";
                 $tipo_mensagem = "success";
                 
-                // Recarregar dados do ingresso após atualização
+                // Recarregar dados do ingresso
                 $ingressos = $ingressoDB->all();
                 foreach($ingressos as $ing) {
                     if($ing->nome == $tipo_ingresso) {
@@ -56,23 +54,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comprar'])) {
                     }
                 }
             } else {
-                $mensagem = "❌ Erro ao processar a compra. Tente novamente.";
+                $mensagem = " Erro ao processar a compra. Tente novamente.";
                 $tipo_mensagem = "error";
             }
         } else {
-            $mensagem = "❌ Estoque insuficiente! Disponível: " . $ingresso_selecionado->quantidade . " ingressos.";
+            $mensagem = " Estoque insuficiente! Disponível: " . $ingresso_selecionado->quantidade . " ingressos.";
             $tipo_mensagem = "error";
         }
     } else {
-        $mensagem = "❌ Quantidade inválida ou ingresso não encontrado.";
+        $mensagem = " Quantidade inválida ou ingresso não encontrado.";
         $tipo_mensagem = "error";
     }
 }
 
-// Verificar qual tipo de ingresso foi selecionado
+// Verificar qual ingresso foi selecionado
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : 'PASSAGEM DE IDA';
 
-// Buscar estoque atual do ingresso selecionado
+// Buscar estoque atual
 $ingressos = $ingressoDB->all();
 $estoque_atual = 0;
 foreach($ingressos as $ing) {
@@ -82,7 +80,7 @@ foreach($ingressos as $ing) {
     }
 }
 
-// Descrições dos ingressos
+// Descrições
 $descricoes = [
     'PASSAGEM DE IDA' => [
         'icone' => '🚪',
@@ -285,7 +283,7 @@ $descricao = isset($descricoes[$tipo]['texto']) ? $descricoes[$tipo]['texto'] : 
 <div class="container">
     <div class="ingresso-card">
         
-        <!-- Ícone decorativo -->
+        <!-- Ícone  -->
         <div class="header-icon">
             🎟️👻
         </div>

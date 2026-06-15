@@ -1,17 +1,16 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Incluir arquivos necessários
+// Incluir arquivos 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/db.class.php';
 
-// Instanciar a classe de notícia
+// Instanciar notiocia
 $noticiaDB = new db('noticia');
 
 $noticia = null;
 $erro = '';
 
-// Verificar se foi passado um ID
+// Verificar  ID
 if (!empty($_GET['id'])) {
     $id = (int)$_GET['id'];
     $noticia = $noticiaDB->find($id);
@@ -23,7 +22,7 @@ if (!empty($_GET['id'])) {
     $erro = "ID da noticia nao informado!";
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+// header
 include '../header2.php';
 ?>
 
@@ -34,7 +33,7 @@ include '../header2.php';
         min-height: 100vh;
     }
     
-    /* Container principal */
+    /* Container  */
     .noticia-container {
         max-width: 1000px;
         margin: 0 auto;
@@ -217,7 +216,7 @@ include '../header2.php';
 
 <div class="noticia-container">
     <?php if ($erro): ?>
-        <!-- Página de erro -->
+        <!-- Página erro -->
         <div class="error-card">
             <div class="error-icon">
                 !
@@ -229,7 +228,7 @@ include '../header2.php';
             </a>
         </div>
     <?php elseif ($noticia): ?>
-        <!-- Notícia encontrada -->
+        <!-- Notícia -->
         <div class="noticia-card">
             <div class="noticia-header">
                 <h1 class="noticia-titulo"><?php echo htmlspecialchars($noticia->titulo); ?></h1>

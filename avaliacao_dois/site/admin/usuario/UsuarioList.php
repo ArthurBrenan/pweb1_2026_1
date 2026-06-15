@@ -1,8 +1,7 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Verificar se usuário está logado
+// Verificar lohgin
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../login.php');
     exit;
@@ -15,7 +14,7 @@ include_once "../db.class.php";
 
 $db = new db('usuario');
 
-// LÓGICA DE EXCLUSÃO - isso precisa vir ANTES de qualquer saída HTML
+// eclusao logica
 if (!empty($_GET['id_deletar'])) {
     try {
         $db->delete($_GET['id_deletar']);
@@ -41,7 +40,7 @@ if (!empty($_GET['busca'])) {
     $dados = $db->all();
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos os headers
+// headers
 include '../header2.php';
 ?>
 
@@ -52,7 +51,7 @@ include '../header2.php';
         min-height: 100vh;
     }
     
-    /* Título principal */
+    /* Título  */
     .page-title {
         font-size: 2rem;
         font-weight: 900;
@@ -71,7 +70,7 @@ include '../header2.php';
         border-radius: 3px;
     }
     
-    /* Botões padrão */
+    /* Botões  */
     .btn-primary-custom {
         background: linear-gradient(145deg, #f1c40f, #d4a00a);
         color: #1a1a1a;
@@ -111,7 +110,7 @@ include '../header2.php';
         color: white;
     }
     
-    /* Campos de formulário */
+    /* formulário */
     .dark-input {
         background-color: #252525 !important;
         border: 1px solid #2c2c2c !important;
@@ -131,7 +130,7 @@ include '../header2.php';
         color: #666;
     }
     
-    /* Tabela - SEM fundo branco */
+    /* Tabela  */
     .custom-table {
         background: #1a1a1a;
         border-radius: 20px;
@@ -198,7 +197,7 @@ include '../header2.php';
         border: 1px solid #f1c40f;
     }
     
-    /* ID do usuário */
+    /* ID  */
     .user-id {
         color: #f1c40f;
         font-weight: bold;

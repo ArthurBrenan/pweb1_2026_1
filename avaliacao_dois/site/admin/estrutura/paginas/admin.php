@@ -1,21 +1,19 @@
 <?php
-// Caminhos corrigidos
+// Caminhos 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/autenticacao.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/db.class.php';
 
-// Iniciar sessão se não estiver ativa
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verificar se usuário está logado
+// Verificar log
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Instanciar classes
 $noticiaDB = new db('noticia');
 $ingressoDB = new db('ingresso');
 $artistaDB = new db('artista');

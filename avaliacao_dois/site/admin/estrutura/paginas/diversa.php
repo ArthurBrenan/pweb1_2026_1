@@ -1,18 +1,17 @@
 <?php
-// Caminho absoluto usando __DIR__
+// Caminho 
 $rootPath = $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois';
 
 require_once $rootPath . '/site/admin/autenticacao.php';
 require_once $rootPath . '/site/admin/db.class.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admin/header.php';
 
-// Instanciar a classe para artista
 $artistaDB = new db('artista');
 
-// Buscar todos os artistas
+// Buscar artistas
 $artistas = $artistaDB->all();
 
-// Ordenar artistas por nome
+// Ordenar artistas
 usort($artistas, function($a, $b) {
     return strcmp($a->nome, $b->nome);
 });
@@ -35,7 +34,6 @@ usort($artistas, function($a, $b) {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Banner de introdução estilizado */
         .hero-banner {
             position: relative;
             background: linear-gradient(145deg, #f1c40f, #d4a00a);
@@ -110,7 +108,7 @@ usort($artistas, function($a, $b) {
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
         
-        /* Cards de artistas */
+        /* Cards */
         .artist-card {
             background: linear-gradient(145deg, #1e1e1e, #161616);
             border-radius: 20px;
@@ -213,7 +211,6 @@ usort($artistas, function($a, $b) {
 
 <body>
 
-    <!-- Banner de introdução estilizado -->
     <div class="container">
         <div class="hero-banner">
             <div class="hero-content text-center">
@@ -221,7 +218,7 @@ usort($artistas, function($a, $b) {
                 <h2 class="hero-title" style="font-size: 1.8rem; margin-top: -10px;">(MAS ELES PARARAM)</h2>
                 
                 
-                <!-- Botão Listagem de Artistas -->
+                <!-- Botão Listagem Artistas -->
                 <div class="mt-4">
                     <a href="../../artista/ArtistaList.php" class="btn-artistas">
                         <i class="fas fa-list"></i>
@@ -233,7 +230,7 @@ usort($artistas, function($a, $b) {
         </div>
     </div>
 
-    <!-- Grid de Artistas - 4 por linha -->
+    <!-- Grid Artistas-->
     <main class="container my-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             <?php if(!empty($artistas)): ?>

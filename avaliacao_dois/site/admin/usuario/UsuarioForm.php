@@ -1,8 +1,7 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Verificar se usuário está logado
+// Verificar log
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../login.php');
     exit;
@@ -84,7 +83,7 @@ if(!empty($_POST)){
     }
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+//header
 include '../header2.php';
 ?>
 
@@ -95,7 +94,7 @@ include '../header2.php';
         min-height: 100vh;
     }
     
-    /* Card estilizado */
+    /* Card */
     .form-card {
         background: linear-gradient(145deg, #1e1e1e, #161616);
         border-radius: 30px;
@@ -249,10 +248,10 @@ include '../header2.php';
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8 col-lg-6">
                 
-                <!-- Card com estilo padronizado -->
+                <!-- Card -->
                 <div class="form-card">
                     
-                    <!-- Título estilizado -->
+                    <!-- Título -->
                     <div class="text-center mb-4">
                         <h1 class="form-title">
                             <?php echo !empty($data->id) ? 'EDITAR USUÁRIO' : 'CADASTRO DE USUÁRIO'; ?>

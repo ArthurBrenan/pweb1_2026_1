@@ -1,8 +1,7 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Verificar se usuário está logado
+// Verificar login
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../login.php');
     exit;
@@ -15,7 +14,7 @@ include_once "../db.class.php";
 
 $db = new db('artista');
 
-// LÓGICA DE EXCLUSÃO - isso precisa vir ANTES de qualquer saída HTML
+// exclusaao logica
 if (!empty($_GET['id_deletar'])) {
     try {
         $db->delete($_GET['id_deletar']);
@@ -41,12 +40,12 @@ if (!empty($_GET['busca'])) {
     $dados = $db->all();
 }
 
-// Ordenar artistas por nome
+// Ordenar artistas
 usort($dados, function($a, $b) {
     return strcmp($a->nome, $b->nome);
 });
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+// dps do processamento, header
 include '../header2.php';
 ?>
 
@@ -57,7 +56,7 @@ include '../header2.php';
         min-height: 100vh;
     }
     
-    /* Título principal */
+    /* Título  */
     .page-title {
         font-size: 2rem;
         font-weight: 900;
@@ -76,7 +75,7 @@ include '../header2.php';
         border-radius: 3px;
     }
     
-    /* Botões padrão */
+    /* Botões  */
     .btn-primary-custom {
         background: linear-gradient(145deg, #f1c40f, #d4a00a);
         color: #1a1a1a;

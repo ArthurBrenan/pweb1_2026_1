@@ -1,5 +1,4 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
 ini_set('display_errors', 1);
@@ -8,7 +7,7 @@ error_reporting(E_ALL);
 include './autenticacao.php';
 include_once "./db.class.php";
 
-// Se já estiver logado, redireciona para o index
+// Se  login, vai p index
 if(isLoggedIn()) {
     header('Location: ../../index.php');
     exit;
@@ -21,14 +20,14 @@ $actionError = '';
 $errors = [];
 $data = null;
 
-// PROCESSAR O FORMULÁRIO QUANDO FOR SUBMETIDO
+// procvessa form emitido
 if(!empty($_POST)){
     
-    // Guarda o que o usuário digitou para não perder os dados caso dê erro
+
     $data = (object) $_POST; 
     
     try {    
-        // Validações obrigatorias
+        // Validações 
         if(empty($_POST['nome'])){
             $errors[] = "<li>O nome é obrigatório</li>";
         }
@@ -44,7 +43,7 @@ if(!empty($_POST)){
             $errors[] = "<li>A senha deve conter no mínimo 4 caracteres</li>";
         }
 
-        // Verificar se email já existe
+        // Verificar se email existe
         if(empty($errors)) {
             $usuarioExistente = $db->findBy('email', $_POST['email']);
             if($usuarioExistente) {
@@ -54,7 +53,7 @@ if(!empty($_POST)){
 
         if(empty($errors)){
             
-            // Prepara os dados para salvar
+            // Prepara dados
             $dadosParaSalvar = [
                 'nome' => $_POST['nome'],
                 'email' => $_POST['email'],
@@ -66,7 +65,7 @@ if(!empty($_POST)){
             $db->store($dadosParaSalvar);
             $success = "Usuario registrado com sucesso! Redirecionando para o login...";
             
-            // Redireciona após 2 segundos
+            // Redireciona em 2 seg
             echo "<script>
                     setTimeout(function() {
                         window.location.href = 'estrutura/paginas/login.php';
@@ -85,7 +84,7 @@ if(!empty($_POST)){
     }
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+//header
 include './header.php';
 ?>
 
@@ -96,7 +95,7 @@ include './header.php';
         min-height: 100vh;
     }
     
-    /* Card estilizado */
+    /* Card */
     .form-card {
         background: linear-gradient(145deg, #1e1e1e, #161616);
         border-radius: 30px;
@@ -256,10 +255,10 @@ include './header.php';
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8 col-lg-6">
                 
-                <!-- Card com estilo padronizado -->
+                <!-- Card -->
                 <div class="form-card">
                     
-                    <!-- Título estilizado -->
+                    <!-- Título -->
                     <div class="text-center mb-4">
                         <h1 class="form-title">REGISTRAR</h1>
                         <div class="title-divider"></div>
@@ -289,7 +288,7 @@ include './header.php';
                         </div>
                     <?php endif; ?>
                     
-                    <!-- Formulário -->
+                    <!-- form -->
                     <form action="" method="post">
                         <div class="mb-3">
                             <label for="nome" class="form-label-custom">NOME COMPLETO</label>

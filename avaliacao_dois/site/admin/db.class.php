@@ -8,11 +8,10 @@ class db {
     private $port     = '3306';
     private $dbname   = 'av2';
     private $table_name;
-    private $conn; // conexão fica guardada para reutilizar
+    private $conn; 
 
-        // Método de busca genérico
+        // busca 
     public function search($termo) {
-        // Verifica qual tabela está sendo usada e faz a busca nos campos apropriados
         switch($this->table_name) {
             case 'usuario':
                 $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR email LIKE :termo OR telefone LIKE :termo ORDER BY nome";
@@ -27,7 +26,7 @@ class db {
                 $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo ORDER BY nome";
                 break;
             default:
-                // Busca genérica - tenta encontrar campos comuns
+                // Busca geral
                 $sql = "SELECT * FROM $this->table_name WHERE nome LIKE :termo OR descricao LIKE :termo";
                 break;
         }
@@ -41,10 +40,10 @@ class db {
     public function __construct($table_name)
     {
         $this->table_name = $table_name;
-        $this->conn = $this->connect(); // cria a conexão uma única vez
+        $this->conn = $this->connect(); // cria conexao
     }
 
-    // Método privado: apenas a própria classe pode chamar
+    // privado
     private function connect()
     {
         try {
@@ -79,7 +78,7 @@ class db {
         return $st->fetchObject();
     }
 
-    // Busca por qualquer outro campo (ex: email)
+    // Busca por qqr outro campo
     public function findBy($campo, $valor){
         $sql = "SELECT * FROM $this->table_name WHERE $campo = ?";
         $st = $this->conn->prepare($sql);
@@ -90,7 +89,7 @@ class db {
 
     // INSERT INTO usuario (...) VALUES (...);
 public function store($dados){
-    // Remove o campo 'id' se existir e estiver vazio
+    // Remove 'id' se existir ou vazio
     if(isset($dados['id']) && empty($dados['id'])) {
         unset($dados['id']);
     }
