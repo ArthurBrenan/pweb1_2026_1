@@ -69,7 +69,7 @@ if(!empty($_POST)){
             // Redireciona após 2 segundos
             echo "<script>
                     setTimeout(function() {
-                        window.location.href = 'login.php';
+                        window.location.href = 'estrutura/paginas/login.php';
                     }, 2000);
                   </script>";
         }
