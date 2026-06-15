@@ -519,7 +519,7 @@ if ($diferenca < 0) {
                                     <p class="card-text small text-secondary">
                                         <?php echo htmlspecialchars(substr($noticia->resumo, 0, 150)); ?>...
                                     </p>
-                                    <a class="btn btn-sm btn-outline-warning rounded-pill px-3" href="noticia_inteira.php?id=<?php echo $noticia->id; ?>">Ler mais</a>
+                                    <a class="btn btn-sm btn-outline-warning rounded-pill px-3" href="../../noticia/noticia_inteira.php?id=<?php echo $noticia->id; ?>">Ler mais</a>
                                 </div>
                             </div>
                             <?php endforeach; ?>
