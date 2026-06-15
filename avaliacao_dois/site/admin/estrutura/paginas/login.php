@@ -256,7 +256,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admi
                                 ENTRAR
                             </button>
                             <div class="text-center mt-3">
-                                <a href="registrar.php" class="register-link">
+                                <a href="../../registrar.php" class="register-link">
                                     Não tem uma conta? <span>Registre-se aqui</span>
                                 </a>
                             </div>
@@ -268,6 +268,3 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pweb1_2026_1/avaliacao_dois/site/admi
     </div>
 </div>
 
-<?php
-include './footer.php';
-?>
