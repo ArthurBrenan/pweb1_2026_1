@@ -1,8 +1,7 @@
 <?php
-// Primeiro, iniciamos a sessão
 session_start();
 
-// Verificar se usuário está logado
+// Verificar login
 if(!isset($_SESSION['usuario_id'])) {
     header('Location: ../login.php');
     exit;
@@ -20,19 +19,18 @@ $actionError = '';
 $errors = [];
 $data = null;
 
-// Se vier um ID via GET (URL), significa que estamos EDITANDO um artista existente
+// Se ID via GET (URL),estamos EDITANDO
 if (!empty($_GET['id'])) {
     $data = $db->find($_GET['id']);
 }
 
-// PROCESSAR O FORMULÁRIO QUANDO FOR SUBMETIDO
+// PROCESSAR FORMULÁRIO
 if(!empty($_POST)){
     
-    // Guarda o que o usuário digitou para não perder os dados caso dê erro
     $data = (object) $_POST; 
     
     try {    
-        // Validações obrigatórias
+        // Validações
         if(empty($_POST['nome'])){
             $errors[] = "<li>O nome do artista é obrigatório</li>";
         }
@@ -40,7 +38,7 @@ if(!empty($_POST)){
             $errors[] = "<li>A descrição é obrigatória</li>";
         }
 
-        // Processar upload da imagem
+        // Processarimagem
         $nomeImagem = '';
         if(isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
             $extensoesPermitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
@@ -54,16 +52,16 @@ if(!empty($_POST)){
                 $errors[] = "<li>Formato de imagem não permitido. Use: JPG, PNG, GIF ou WEBP</li>";
             }
             
-            // Validar tamanho (máximo 5MB)
+            // Validar tamanho
             if($tamanho > 5 * 1024 * 1024) {
                 $errors[] = "<li>A imagem deve ter no máximo 5MB</li>";
             }
             
             if(empty($errors)) {
-                // Criar nome único para a imagem
+                // Criar nome
                 $nomeImagem = uniqid() . '.' . $extensao;
                 
-                // Caminho onde a imagem será salva
+                // Caminho onde será salva
                 $caminhoUpload = '../uploads/';
                 
                 // Criar pasta se não existir
@@ -85,24 +83,24 @@ if(!empty($_POST)){
                 }
             }
         } elseif(!empty($_POST['id']) && empty($_FILES['imagem']['name'])) {
-            // Se for edição e não enviou nova imagem, manter a existente
+            // Se for edição e não enviou nova imagem, manter a q tem
             $nomeImagem = $data->imagem ?? '';
         }
 
         if(empty($errors)){
             
-            // Prepara os dados para salvar
+            // Prepara os dados 
             $dadosParaSalvar = [
                 'nome' => $_POST['nome'],
                 'descricao' => $_POST['descricao']
             ];
             
-            // Adicionar imagem se tiver
+            // add imagem se tiver
             if(!empty($nomeImagem)) {
                 $dadosParaSalvar['imagem'] = $nomeImagem;
             }
 
-            // Se tiver ID preenchido no formulário, atualiza. Se não, cria um novo.
+            // Se tiver ID, atualiza. Se não, cria um novo.
             if (!empty($_POST['id'])) {
                 $dadosParaSalvar['id'] = $_POST['id'];
                 $db->update($dadosParaSalvar);
@@ -112,7 +110,7 @@ if(!empty($_POST)){
                 $success = "Artista cadastrado com sucesso! Redirecionando...";
             }
             
-            // Redireciona após 2 segundos
+            // Redirect de 2 seg
             echo "<script>
                     setTimeout(function() {
                         window.location.href = 'ArtistaList.php';
@@ -127,7 +125,7 @@ if(!empty($_POST)){
     }
 }
 
-// Agora sim, depois de todo o processamento PHP, incluímos o header
+//incluir header
 include '../header2.php';
 ?>
 
@@ -138,7 +136,7 @@ include '../header2.php';
         min-height: 100vh;
     }
     
-    /* Card estilizado */
+    /* Card  */
     .form-card {
         background: linear-gradient(145deg, #1e1e1e, #161616);
         border-radius: 30px;
@@ -171,7 +169,7 @@ include '../header2.php';
         border-radius: 3px;
     }
     
-    /* Labels */
+    /*  */
     .form-label-custom {
         color: #f1c40f;
         letter-spacing: 1px;
