@@ -211,7 +211,7 @@
       
     <div class="menu-divider"></div>
     
-    <form method="POST" action="../logout.php" style="margin-top: 20px;">
+    <form method="POST" action="../../logout.php" style="margin-top: 20px;">
         <button type="submit" class="logout-btn">..
             <i class="fas fa-sign-out-alt"></i> SAIR
         </button>
